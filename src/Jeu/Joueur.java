@@ -2,7 +2,10 @@ package Jeu;
 
 public class Joueur {
 
-	private Integer ressource;
+	private Integer nbRessource;
+	private Integer nbVilles;
+	 
+	
 	
 	
 }
