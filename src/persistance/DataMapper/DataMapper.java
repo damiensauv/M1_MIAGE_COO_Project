@@ -1,4 +1,4 @@
-package DataMapper;
+package persistance.DataMapper;
 
 public abstract class DataMapper<T> {
 
