@@ -1,7 +1,6 @@
-package persistance.DataMapper;
+package Persistance.DataMapper;
 
 import Jeu.Joueur;
-import persistance.DataMapper.DataMapper;
 
 public class JoueurMapper extends DataMapper<Joueur> {
 
