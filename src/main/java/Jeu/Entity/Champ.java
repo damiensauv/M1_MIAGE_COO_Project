@@ -1,4 +1,4 @@
-package Jeu;
+package Jeu.Entity;
 
 public class Champ extends Territoire{
 

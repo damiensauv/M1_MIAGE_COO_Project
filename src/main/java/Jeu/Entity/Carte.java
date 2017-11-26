@@ -1,4 +1,4 @@
-package Jeu;
+package Jeu.Entity;
 
 import java.util.ArrayList;
 import java.util.Random;

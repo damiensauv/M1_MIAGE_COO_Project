@@ -1,4 +1,4 @@
-package Jeu;
+package Jeu.Entity;
 
 public abstract class Territoire {
 
