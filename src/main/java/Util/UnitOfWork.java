@@ -31,7 +31,7 @@ public class UnitOfWork implements Observer {
         for (IDomainObject obj : dirty) {
             v.visiter(obj);
         }
-        Oracle.getInstance().commit();// TODO : !voir cette ligne pour eviter l'exception !!
+        //Oracle.getInstance().commit();// TODO : !voir cette ligne pour eviter l'exception !!
         dirty.clear();
     }
 

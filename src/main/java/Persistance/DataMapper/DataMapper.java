@@ -1,10 +1,25 @@
 package Persistance.DataMapper;
 
+import Persistance.Oracle.Oracle;
+import Util.IDMap;
+
+import java.sql.Connection;
+
 public abstract class DataMapper<T> {
 
-    public DataMapper() {}
+    protected Connection connection;
+    protected IDMap<T> idMap;
 
-    abstract T find(T o);
+    public DataMapper() {
+        try {
+            connection = Oracle.getInstance();
+            idMap = new IDMap<T>();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    abstract T find(Integer id);
 
     abstract void insert(T o);
 
