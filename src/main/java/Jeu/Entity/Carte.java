@@ -3,6 +3,7 @@ package Jeu.Entity;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class Carte {
 
 	private Territoire[][] carte;
@@ -18,27 +19,30 @@ public class Carte {
 
 		// Il nous faut un nombre aléatoire pour générer les cases de la map
 		Random randomGenerator = new Random();
-		int randomInt = randomGenerator.nextInt(3);
+		int randomInt;
 
 		// On crée la carte ligne par ligne
-		for (int i = 0; i <= y; i++) {
-			for (int j = 0; j <= x; j++) {
-				this.setTerritoire(new Coordonnees(x, y), randomInt);
+		for (int i = 0; i < y; i++) {
+			for (int j = 0; j < x; j++) {
+				randomInt = randomGenerator.nextInt(3);
+				this.setTerritoire(new Coordonnees(i, j), randomInt);
 			}
 		}
 	}
 
 	public void setTerritoire(Coordonnees coord, int type) {
 
+		int xpos = coord.getX() ;
+		int ypos = coord.getY() ;
 		switch (type) {
+		case 0:
+			this.carte[xpos][ypos] = new Plaine(coord);
+			break;
 		case 1:
-			this.carte[coord.getX()][coord.getY()] = new Plaine(coord);
+			this.carte[xpos][ypos] = new Champ(coord);
 			break;
 		case 2:
-			this.carte[coord.getX()][coord.getY()] = new Champ(coord);
-			break;
-		case 3:
-			this.carte[coord.getX()][coord.getY()] = new Montagne(coord);
+			this.carte[xpos][ypos] = new Montagne(coord);
 			break;
 
 		default:
@@ -73,13 +77,13 @@ public class Carte {
 
 	public void AfficherCarteDebug() {
 
-		for (int i = 0; i <= this.carte.length; i++) {
-			for (int j = 0; j <= this.carte[i].length; j++) {
- 
+		for (int i = 0; i < this.carte.length; i++) {
+			for (int j = 0; j < this.carte[i].length; j++) {
+
 				this.carte[i][j].AfficherTypeTerritoire();
-			
+
 			}
-			//A la ligne
+			// A la ligne
 			System.out.println("");
 		}
 
