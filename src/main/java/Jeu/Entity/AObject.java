@@ -17,12 +17,12 @@ public abstract class AObject implements IDomainObject {
         this.obs = new ArrayList<Observer>();
     }
 
-    void setId(Integer id){
+    public void setId(Integer id){
         this.id = id;
         notifier();
     }
 
-    Integer getId(){
+    public Integer getId(){
         return this.id;
     }
 

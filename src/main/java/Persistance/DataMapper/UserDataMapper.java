@@ -19,13 +19,17 @@ public class UserDataMapper extends DataMapper<IUser> {
 
 
     IUser find(Integer id) {
-    /*
+
+        /*
         IUser p = idMap.get(id);
         if (p != null) {
             System.out.println("Get from IdMap");
             return p;
         }
-*/
+        */
+        
+
+
         // Code Temporaire
 
 

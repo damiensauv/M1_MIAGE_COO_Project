@@ -1,6 +1,8 @@
 package Jeu.Interface;
 
-public interface IUser {
+import Util.IDomainObject;
+
+public interface IUser extends IDomainObject {
 
 
 }
