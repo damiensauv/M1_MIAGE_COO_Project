@@ -4,8 +4,8 @@ import Jeu.Interface.IUser;
 
 public class User extends AObject implements IUser {
 
-    String username;
-    String password;
+    private String username;
+    private String password;
 
     public String getUsername() {
         return this.username;
