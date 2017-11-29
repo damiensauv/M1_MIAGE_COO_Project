@@ -1,6 +1,6 @@
 package Persistance.DataMapper;
 
-import Persistance.Oracle.Oracle;
+import Persistance.MySql.MySql;
 import Util.IDMap;
 
 import java.sql.Connection;
@@ -12,9 +12,9 @@ public abstract class DataMapper<T> {
 
     public DataMapper() {
         try {
-            connection = Oracle.getInstance();
+            connection = MySql.getInstance();
             idMap = new IDMap<T>();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

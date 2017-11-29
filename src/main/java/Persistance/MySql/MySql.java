@@ -1,14 +1,14 @@
-package Persistance.Oracle;
+package Persistance.MySql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Oracle {
+public class MySql {
 
     private static Connection connection;
 
-    private Oracle() {
+    private MySql() {
         try {
             initConnexion();
         } catch (ClassNotFoundException e) {
@@ -20,16 +20,15 @@ public class Oracle {
 
     // TODO : Crypt Password ?
     private void initConnexion() throws ClassNotFoundException, SQLException {
-        Class.forName("oracle.jdbc.OracleDriver");
-        connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fil.univ-lille1.fr:1521:filora", "SAUVALLE", "CooProject");
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        connection = DriverManager.getConnection("jdbc:mysql://webtp.fil.univ-lille1.fr/sauvalle", "sauvalle", "toto62");
         connection.setAutoCommit(false);
     }
 
     public static Connection getInstance() {
         if (connection == null) {
-            new Oracle();
+            new MySql();
         }
         return connection;
     }
-
 }
