@@ -2,6 +2,7 @@ package Persistance.DataMapper;
 
 import Jeu.Entity.User;
 import Jeu.Interface.IUser;
+import Util.UnitOfWork;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +31,11 @@ public class UserDataMapper extends DataMapper<IUser> {
     }
 
     public IUser find(Integer id) {
-        User p;
+        IUser p = idMap.get(id);
+        if (p != null) {
+            System.out.println("Get From IDMAP");
+            return p;
+        }
 
         String req = "SELECT id, username, password FROM user WHERE id=?";
         try {
@@ -42,6 +47,10 @@ public class UserDataMapper extends DataMapper<IUser> {
                 return null;
             }
             p = this.createUser(rs);
+
+            idMap.put(id, p);
+            p.add(UnitOfWork.getInstance());
+
             return p;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,6 +60,8 @@ public class UserDataMapper extends DataMapper<IUser> {
 
     public IUser findByUsername(String username) {
         User p;
+
+        // TODO : trouver un moyen de recup from IDMap via username
 
         String req = "SELECT id, username, password FROM user WHERE username=?";
         try {
