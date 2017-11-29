@@ -1,7 +1,10 @@
 package Service;
 
+import Jeu.Entity.User;
 import Jeu.Interface.IUser;
 import Persistance.DataMapper.UserDataMapper;
+
+import java.util.List;
 
 public class UserService {
 
@@ -29,6 +32,10 @@ public class UserService {
             System.out.println("Password not Match !!"); // TODO : Lever un Exception !!
             return null;
         }
+    }
+
+    public List<User> getAllUser(){
+        return null;
     }
 
 
