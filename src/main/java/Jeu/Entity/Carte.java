@@ -12,6 +12,8 @@ public class Carte {
 
 	// On déclare la carte avec ses dimensions
 
+	// possede un Id
+
 	public Carte(int x, int y) {
 
 		super();

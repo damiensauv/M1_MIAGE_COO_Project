@@ -13,14 +13,17 @@ public class User extends AObject implements IUser {
 
     public void setUsername(String username) {
         this.username = username;
+        notifier();
     }
 
     public String getPassword() {
         return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password)
+    {
         this.password = password;
+        notifier();
     }
 
 }
