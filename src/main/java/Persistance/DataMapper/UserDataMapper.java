@@ -47,10 +47,8 @@ public class UserDataMapper extends DataMapper<IUser> {
                 return null;
             }
             p = this.createUser(rs);
-
             idMap.put(id, p);
             p.add(UnitOfWork.getInstance());
-
             return p;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,9 +57,7 @@ public class UserDataMapper extends DataMapper<IUser> {
     }
 
     public IUser findByUsername(String username) {
-        User p;
-
-        // TODO : trouver un moyen de recup from IDMap via username
+        IUser p;
 
         String req = "SELECT id, username, password FROM user WHERE username=?";
         try {
@@ -72,7 +68,14 @@ public class UserDataMapper extends DataMapper<IUser> {
                 System.out.println("not in bd " + username);
                 return null;
             }
+            p = idMap.get(rs.getInt(1));
+            if (p != null) {
+                System.out.println("Get From IDMAP");
+                return p;
+            }
             p = this.createUser(rs);
+            idMap.put(rs.getInt(1), p);
+            p.add(UnitOfWork.getInstance());
             return p;
         } catch (SQLException e) {
             e.printStackTrace();
