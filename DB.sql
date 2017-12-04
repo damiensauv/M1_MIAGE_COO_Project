@@ -4,3 +4,19 @@ username varchar(50) DEFAULT NULL,
 password varchar(50) DEFAULT NULL,
 PRIMARY KEY(id)
 );
+
+CREATE TABLE game (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  owner int(11) NOT NULL,
+  winner int(11) DEFAULT NULL,
+  map_size int(11) NOT NULL,
+  max_user int(11) NOT NULL,
+  nb_init_res int(11) NOT NULL,
+  nb_res_turn int(11) NOT NULL,
+  time_turn int(11) NOT NULL,
+  carte int(11) NOT NULL,
+  current_turn int(11) NOT NULL,
+  user_in_game int(11) NOT NULL,
+  status tinyint(1) NOT NULL,
+  PRIMARY KEY (id)
+);
