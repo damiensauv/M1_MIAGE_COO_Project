@@ -9,6 +9,7 @@ import java.util.List;
 public class UserService {
 
     private static UserService instance = null;
+    private IUser connectedUser = null;
 
     public static UserService getInstance() {
         if (instance == null) {
@@ -23,20 +24,27 @@ public class UserService {
     // Test : si username not in BDD
     public IUser connexion(String username, String password) {
 
-        IUser u = UserDataMapper.getInstance().findByUsername(username);
+        connectedUser = UserDataMapper.getInstance().findByUsername(username);
 
-        if (u.getPassword().equals(password)) {
-            System.out.println("Password ok for : " + u.getUsername());
-            return u;
+        if (connectedUser.getPassword().equals(password)) {
+            System.out.println("Password ok for : " + connectedUser.getUsername());
+            return connectedUser;
         } else {
             System.out.println("Password not Match !!"); // TODO : Lever un Exception !!
             return null;
         }
     }
 
+    public IUser getConnectedUser() {
+        return connectedUser;
+    }
+
+    public static void setInstance(UserService instance) {
+        UserService.instance = instance;
+    }
+
     public List<User> getAllUser(){
         return null;
     }
-
 
 }
