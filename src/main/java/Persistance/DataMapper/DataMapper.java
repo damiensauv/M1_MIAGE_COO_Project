@@ -4,6 +4,7 @@ import Persistance.MySql.MySql;
 import Util.IDMap;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public abstract class DataMapper<T> {
 
@@ -25,5 +26,5 @@ public abstract class DataMapper<T> {
 
     abstract void delete(T o);
 
-    abstract void update(T o);
+    abstract void update(T o) throws SQLException;
 }
