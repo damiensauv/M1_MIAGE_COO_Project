@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ConnexionFrame extends JFrame implements ActionListener {
+public class ConnexionFrame extends MyFrame implements ActionListener {
 
     JButton login;
     TextField username;
@@ -34,7 +34,7 @@ public class ConnexionFrame extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == login){
+        if (e.getSource() == login) {
 
             // get username & password
             // call Service
