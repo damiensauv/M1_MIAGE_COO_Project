@@ -12,7 +12,7 @@ public class Game extends AObject implements IGame {
     private User winner;
 
     // Game Option
-    private Integer mapSize;
+    private Coordonnees mapSize;
     private Integer maxUser;
     private Integer NbInitRes;
     private Integer NbResTurn;
@@ -50,11 +50,11 @@ public class Game extends AObject implements IGame {
         notifier();
     }
 
-    public Integer getMapSize() {
+    public Coordonnees getMapSize() {
         return mapSize;
     }
 
-    public void setMapSize(Integer mapSize) {
+    public void setMapSize(Coordonnees mapSize) {
         this.mapSize = mapSize;
         notifier();
     }
