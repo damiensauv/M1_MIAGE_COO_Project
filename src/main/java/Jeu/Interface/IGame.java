@@ -2,7 +2,6 @@ package Jeu.Interface;
 
 import Jeu.Entity.Carte;
 import Jeu.Entity.Coordonnees;
-import Jeu.Entity.User;
 import Util.IDomainObject;
 
 import java.util.List;
@@ -57,8 +56,8 @@ public interface IGame extends IDomainObject {
 
     public void setCurrentTurn(Integer currentTurn);
 
-    public List<User> getUserInGame();
+    public List<IJoueur> getUserInGame();
 
-    public void setUserInGame(List<User> userInGame);
+    public void setUserInGame(List<IJoueur> userInGame);
 
 }

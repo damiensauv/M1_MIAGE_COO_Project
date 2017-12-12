@@ -21,3 +21,8 @@ CREATE TABLE game (
   status tinyint(1) NOT NULL,
   PRIMARY KEY (id)
 );
+
+CREATE TABLE joueur (
+  id_user int(11) NOT NULL,
+  id_game int(11) NOT NULL
+);

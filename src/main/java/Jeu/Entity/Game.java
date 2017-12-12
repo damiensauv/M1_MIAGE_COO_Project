@@ -1,6 +1,7 @@
 package Jeu.Entity;
 
 import Jeu.Interface.IGame;
+import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
 import Util.Observer;
 import Util.Visitor;
@@ -25,7 +26,7 @@ public class Game extends AObject implements IGame {
     private Carte carte; // Tout les donnes sur letat de la carte sont dedans
 
     private Integer currentTurn = 0;
-    private List<User> userInGame; // Table asso Id-Game, Id-User, Point Ressources
+    private List<IJoueur> userInGame; // Table asso Id-Game, Id-User, Point Ressources
 
     public boolean isStatus() {
         return status;
@@ -117,11 +118,11 @@ public class Game extends AObject implements IGame {
         notifier();
     }
 
-    public List<User> getUserInGame() {
+    public List<IJoueur> getUserInGame() {
         return userInGame;
     }
 
-    public void setUserInGame(List<User> userInGame) {
+    public void setUserInGame(List<IJoueur> userInGame) {
         this.userInGame = userInGame;
         notifier();
     }

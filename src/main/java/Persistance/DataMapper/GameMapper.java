@@ -74,6 +74,8 @@ public class GameMapper extends DataMapper<IGame> {
         game.setCurrentTurn(rs.getInt("current_turn"));
         game.setStatus(rs.getBoolean("status"));
 
+//        game.setUserInGame();
+
         return game;
     }
 
