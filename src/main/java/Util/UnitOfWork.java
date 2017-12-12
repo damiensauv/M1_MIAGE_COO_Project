@@ -1,6 +1,5 @@
 package Util;
 
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,12 +23,13 @@ public class UnitOfWork implements Observer {
         dirty.add(obj);
     }
 
-    public void commit() throws SQLException {
+    public void commit() {
         Visitor v = new Committer();
+
         for (IDomainObject obj : dirty) {
             v.visiter(obj);
         }
-        //Oracle.getInstance().commit();// TODO : !voir cette ligne pour eviter l'exception !!
+
         dirty.clear();
     }
 
