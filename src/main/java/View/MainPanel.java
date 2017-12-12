@@ -6,13 +6,13 @@ import java.awt.event.ActionListener;
 
 public class MainPanel extends MyPanel implements ActionListener {
 
-    JButton createGameButton;
-    JButton histoGame;
-    JButton logout;
-    JButton awaytingGame;
-    JButton inProgressGame;
+    private JButton createGameButton;
+    private JButton histoGame;
+    private JButton logout;
+    private JButton awaytingGame;
+    private JButton inProgressGame;
 
-    public MainPanel(MyFrame frame){
+    public MainPanel(MyFrame frame) {
         super(frame);
 
         createGameButton = new JButton("Crée une Partie");
@@ -20,7 +20,6 @@ public class MainPanel extends MyPanel implements ActionListener {
         logout = new JButton("deconnexion");
         awaytingGame = new JButton("Partie en tete");
         inProgressGame = new JButton("Partie en cours");
-
 
         createGameButton.addActionListener(this);
         histoGame.addActionListener(this);
@@ -36,8 +35,23 @@ public class MainPanel extends MyPanel implements ActionListener {
 
     }
 
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void actionPerformed(ActionEvent e) {
 
+        Object source = e.getSource();
+        if (source == createGameButton){
+            this.getMyFrame().switchPanel(new CreateGamePanel(this.getMyFrame()));
+        } else if (source == histoGame){
+            this.getMyFrame().switchPanel(new HistoGamePanel(this.getMyFrame()));
+        }else if (source == logout){
+
+            // revenir au login && effacer user co
+            this.getMyFrame().switchPanel(new ConnexionPanel(this.getMyFrame()));
+
+        } else if (source == awaytingGame){
+            this.getMyFrame().switchPanel(new AwaytingGamePanel(this.getMyFrame()));
+        }else if (source == inProgressGame){
+            this.getMyFrame().switchPanel(new InProgressGamePanel(this.getMyFrame()));
+        }
 
     }
 }

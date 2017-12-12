@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 public class ConnexionPanel extends MyPanel implements ActionListener {
 
-    JButton login;
-    TextField username;
-    TextField password;
+    private JButton login;
+    private TextField username;
+    private TextField password;
 
     public ConnexionPanel(MyFrame frame) {
         super(frame);
@@ -20,7 +20,6 @@ public class ConnexionPanel extends MyPanel implements ActionListener {
 
         this.add(new JLabel("username : "));
         this.add(username);
-
         this.add(new JLabel("password : "));
         this.add(password);
         this.add(login);
