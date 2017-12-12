@@ -1,4 +1,4 @@
-import View.MyFrame;
+import View.utils.MyFrame;
 
 public class Main {
 

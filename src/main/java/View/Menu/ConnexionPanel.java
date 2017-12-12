@@ -1,4 +1,7 @@
-package View;
+package View.Menu;
+
+import View.utils.MyFrame;
+import View.utils.MyPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,21 +30,23 @@ public class ConnexionPanel extends MyPanel implements ActionListener {
 
         // a revoir
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
     }
 
     public void actionPerformed(ActionEvent e) {
 
+        this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
+
+        /*
         if (e.getSource() == login) {
-
-            // a revoir pour opti
-            this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
-
-            // get username & password
-            // call Service
-            // Call Menu
-
+            // TODO a revoir pour opti
+           boolean c = UserService.getInstance().connexion(this.username.getText(), this.password.getText());
+            if (c) {
+                this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
+            } else {
+                // TODO dire qu'il y a une erreur
+            }
         }
+        */
 
     }
 }

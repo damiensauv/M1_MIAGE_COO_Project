@@ -21,17 +21,17 @@ public class UserService {
     private UserService() {
     }
 
-    // Test : si username not in BDD
-    public IUser connexion(String username, String password) {
+    public boolean connexion(String username, String password) {
 
         connectedUser = UserDataMapper.getInstance().findByUsername(username);
+        // TODO : Return null si pas la !! a gerer
 
         if (connectedUser.getPassword().equals(password)) {
             System.out.println("Password ok for : " + connectedUser.getUsername());
-            return connectedUser;
+            return true;
         } else {
             System.out.println("Password not Match !!"); // TODO : Lever un Exception !!
-            return null;
+            return false;
         }
     }
 

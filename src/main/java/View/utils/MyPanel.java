@@ -1,4 +1,6 @@
-package View;
+package View.utils;
+
+import View.utils.MyFrame;
 
 import javax.swing.*;
 
