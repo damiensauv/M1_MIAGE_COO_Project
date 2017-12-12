@@ -2,7 +2,10 @@ package Service;
 
 import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
+import Persistance.DataMapper.GameMapper;
+import Util.UnitOfWork;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class GameService {
@@ -20,29 +23,38 @@ public class GameService {
 
     }
 
-    public void createGame(Coordonnees co, Integer maxu, Integer nbir, Integer nbRest, Integer tt, String name){
+    public void createGame(Coordonnees coordonnees, Integer maxUser, Integer nbInitRes, Integer nbResTurn, Integer timeTurn, String name) throws SQLException {
 
+        Game game = new Game();
 
+        game.setName(name);
+        game.setStatus(false);
+        game.setOwner(null); // a changer
+        game.setMapSize(coordonnees);
+        game.setMaxUser(maxUser);
+        game.setNbInitRes(nbInitRes);
+        game.setTimeTurn(timeTurn);
+        game.setNbResTurn(nbResTurn);
+        game.setCarte(null); // A changer
 
+        GameMapper.getInstance().insert(game);
+        UnitOfWork.getInstance().commit();
+    }
 
-
+    public void updateGame(Game game) {
 
     }
 
-    public void updateGame(Game game){
-
-    }
-
-    public Game getGame(Integer id){
+    public Game getGame(Integer id) {
 
         return null;
     }
 
-    public List<Game> getActiveGameOfPlayer(Integer idUser){
+    public List<Game> getActiveGameOfPlayer(Integer idUser) {
         return null;
     }
 
-    public List<Game> getAwaytingGame(){
+    public List<Game> getAwaytingGame() {
         return null;
     }
 

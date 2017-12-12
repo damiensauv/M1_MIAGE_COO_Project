@@ -6,9 +6,21 @@ import Util.UnitOfWork;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class GameMapper extends DataMapper<IGame> {
 
+    private static GameMapper instance = null;
+
+    public static GameMapper getInstance() {
+        if (instance == null) {
+            instance = new GameMapper();
+        }
+        return instance;
+    }
+
+    private GameMapper() {
+    }
 
     public IGame find(Integer id) {
         IGame p = idMap.get(id);
@@ -36,28 +48,50 @@ public class GameMapper extends DataMapper<IGame> {
             return null;
         }
 
-
     }
 
     private IGame createGame(ResultSet rs) {
         return null;
     }
 
-    void insert(IGame o) {
+    public void insert(IGame o) throws SQLException { // passer avec un try catch ici
+
+        String query = "INSERT INTO game(name, owner, map_size_x, map_size_y, max_user, nb_init_res, nb_res_turn, time_turn, carte, status)" +
+                " VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, o.getName());
+        preparedStatement.setInt(2, 1);// a modif
+        preparedStatement.setInt(3, o.getMapSize().getX());
+        preparedStatement.setInt(4, o.getMapSize().getY());
+        preparedStatement.setInt(5, o.getMaxUser());
+        preparedStatement.setInt(6, o.getNbInitRes());
+        preparedStatement.setInt(7, o.getNbResTurn());
+        preparedStatement.setInt(8, o.getTimeTurn());
+        preparedStatement.setInt(9, 1); // a changer !!
+        preparedStatement.setBoolean(10, o.isStatus());
+
+        preparedStatement.executeUpdate(); // see code of balla
+
+        Integer idx = getLastIndexInsert(preparedStatement);
+
+        idMap.put(idx, o);
+        o.add(UnitOfWork.getInstance());
+    }
+
+    public void delete(IGame o) {
 
     }
 
-    void delete(IGame o) {
+    public void update(IGame o) throws SQLException {
+        System.out.println("UPDATE GAME");
 
-    }
-
-    void update(IGame o) throws SQLException {
-        String query = "UPDATE coo_tp_personne SET nom=?, prenom=?, id_pere=?, eval=? WHERE id=?"; // revoir la requete
+        /*String query = "UPDATE coo_tp_personne SET nom=?, prenom=?, id_pere=?, eval=? WHERE id=?"; // revoir la requete
         PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-    /*
+    *//*
         preparedStatement.setString(1, personne.getNom());
-    */
-        preparedStatement.executeUpdate();
+    *//*
+        preparedStatement.executeUpdate();*/
     }
 }

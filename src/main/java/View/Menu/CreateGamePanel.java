@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class CreateGamePanel extends MyPanel implements ActionListener {
 
@@ -74,7 +75,11 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
             Integer tt = Integer.parseInt(timeTurn.getText());
 
             // TODO : Verif si ok
-            GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText());
+            try {
+                GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText());
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
 
             this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
 

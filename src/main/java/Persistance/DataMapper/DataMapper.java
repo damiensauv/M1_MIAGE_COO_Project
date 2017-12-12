@@ -4,6 +4,8 @@ import Persistance.MySql.MySql;
 import Util.IDMap;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class DataMapper<T> {
@@ -22,9 +24,24 @@ public abstract class DataMapper<T> {
 
     abstract T find(Integer id);
 
-    abstract void insert(T o);
+    abstract void insert(T o) throws SQLException;
 
     abstract void delete(T o);
 
     abstract void update(T o) throws SQLException;
+
+    public Integer getLastIndexInsert(PreparedStatement ps)
+    {
+        try {
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next())
+            {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return 0;
+    }
 }
