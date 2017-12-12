@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Game extends AObject implements IGame {
 
+    private String name;
     private boolean status;// en cours ou pas
     private User owner; // Automatic dans les UserInGame ??
     private User winner;
@@ -120,4 +121,13 @@ public class Game extends AObject implements IGame {
         this.userInGame = userInGame;
         notifier();
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }

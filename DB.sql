@@ -7,6 +7,7 @@ PRIMARY KEY(id)
 
 CREATE TABLE game (
   id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(50) DEFAULT NULL,
   owner int(11) NOT NULL,
   winner int(11) DEFAULT NULL,
   map_size int(11) NOT NULL,
