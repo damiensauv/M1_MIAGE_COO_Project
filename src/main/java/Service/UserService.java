@@ -2,7 +2,7 @@ package Service;
 
 import Jeu.Entity.User;
 import Jeu.Interface.IUser;
-import Persistance.DataMapper.UserDataMapper;
+import Persistance.DataMapper.UserMapper;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class UserService {
 
     public boolean connexion(String username, String password) {
 
-        connectedUser = UserDataMapper.getInstance().findByUsername(username);
+        connectedUser = UserMapper.getInstance().findByUsername(username);
         if (connectedUser == null)
             return false;
 

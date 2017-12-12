@@ -8,18 +8,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDataMapper extends DataMapper<IUser> {
+public class UserMapper extends DataMapper<IUser> {
 
-    private static UserDataMapper instance = null;
+    private static UserMapper instance = null;
 
-    public static UserDataMapper getInstance() {
+    public static UserMapper getInstance() {
         if (instance == null) {
-            instance = new UserDataMapper();
+            instance = new UserMapper();
         }
         return instance;
     }
 
-    private UserDataMapper() {
+    private UserMapper() {
     }
 
     private User createUser(ResultSet rs) throws SQLException {

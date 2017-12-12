@@ -1,7 +1,7 @@
 package Persistance.Factory;
 
 import Jeu.Interface.IUser;
-import Persistance.DataMapper.UserDataMapper;
+import Persistance.DataMapper.UserMapper;
 
 public class UserFactory implements Factory<IUser> {
 
@@ -12,7 +12,7 @@ public class UserFactory implements Factory<IUser> {
     }
 
     public IUser create() {
-        IUser user = UserDataMapper.getInstance().find(this.id);
+        IUser user = UserMapper.getInstance().find(this.id);
         return user;
     }
 }
