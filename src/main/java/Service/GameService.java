@@ -1,5 +1,6 @@
 package Service;
 
+import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
 
 import java.util.List;
@@ -19,7 +20,12 @@ public class GameService {
 
     }
 
-    public void createGame(){
+    public void createGame(Coordonnees co, Integer maxu, Integer nbir, Integer nbRest, Integer tt, String name){
+
+
+
+
+
 
     }
 

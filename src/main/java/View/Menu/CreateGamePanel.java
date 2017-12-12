@@ -1,5 +1,7 @@
 package View.Menu;
 
+import Jeu.Entity.Coordonnees;
+import Service.GameService;
 import View.utils.MyFrame;
 import View.utils.MyPanel;
 
@@ -13,6 +15,7 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
     private JButton confirm;
     private JButton cancel;
 
+    private TextField name;
     private TextField mapSizeX;
     private TextField mapSizeY;
     private TextField maxUser;
@@ -26,6 +29,7 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
 
         confirm = new JButton("confirm");
         cancel = new JButton("cancel");
+        name = new TextField(25);
         mapSizeX = new TextField(25);
         mapSizeY = new TextField(25);
         maxUser = new TextField(25);
@@ -33,9 +37,12 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
         nbResTurn = new TextField(25);
         timeTurn = new TextField(25);
 
+
         confirm.addActionListener(this);
         cancel.addActionListener(this);
 
+        this.add(new JLabel("Name : "));
+        this.add(name);
         this.add(new JLabel("Map x : "));
         this.add(mapSizeX);
         this.add(new JLabel("Map y : "));
@@ -60,10 +67,19 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
         Object source = e.getSource();
         if (source == confirm) {
 
-            // Create the Game and Back to Main
+            Coordonnees co = new Coordonnees(Integer.parseInt(mapSizeX.getText()), Integer.parseInt(mapSizeY.getText()));
+            Integer maxu = Integer.parseInt(maxUser.getText());
+            Integer nbir =  Integer.parseInt(nbInitRes.getText());
+            Integer nbRest = Integer.parseInt(nbResTurn.getText());
+            Integer tt = Integer.parseInt(timeTurn.getText());
+
+            // TODO : Verif si ok
+            GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText());
+
+            this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
 
         }else if (source == cancel){
-            // return MainMenu
+            this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
         }
 
 
