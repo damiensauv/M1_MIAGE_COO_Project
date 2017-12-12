@@ -38,7 +38,6 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
         nbResTurn = new TextField(25);
         timeTurn = new TextField(25);
 
-
         confirm.addActionListener(this);
         cancel.addActionListener(this);
 
@@ -68,22 +67,21 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
         Object source = e.getSource();
         if (source == confirm) {
 
-            Coordonnees co = new Coordonnees(Integer.parseInt(mapSizeX.getText()), Integer.parseInt(mapSizeY.getText()));
-            Integer maxu = Integer.parseInt(maxUser.getText());
-            Integer nbir =  Integer.parseInt(nbInitRes.getText());
-            Integer nbRest = Integer.parseInt(nbResTurn.getText());
-            Integer tt = Integer.parseInt(timeTurn.getText());
-
-            // TODO : Verif si ok
             try {
+                Coordonnees co = new Coordonnees(Integer.parseInt(mapSizeX.getText()), Integer.parseInt(mapSizeY.getText()));
+                Integer maxu = Integer.parseInt(maxUser.getText());
+                Integer nbir = Integer.parseInt(nbInitRes.getText());
+                Integer nbRest = Integer.parseInt(nbResTurn.getText());
+                Integer tt = Integer.parseInt(timeTurn.getText());
+
                 GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText());
+                this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
             } catch (SQLException e1) {
                 e1.printStackTrace();
+            }catch (Exception e2){
+                JOptionPane.showMessageDialog(this, "Merci de remplit tout les champs correctement");
             }
-
-            this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
-
-        }else if (source == cancel){
+        } else if (source == cancel) {
             this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
         }
 
