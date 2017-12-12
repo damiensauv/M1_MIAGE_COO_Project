@@ -84,7 +84,7 @@ public class GameMapper extends DataMapper<IGame> {
 
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, o.getName());
-        preparedStatement.setInt(2, 1);// a modif
+        preparedStatement.setInt(2, o.getOwner().getId());
         preparedStatement.setInt(3, o.getMapSize().getX());
         preparedStatement.setInt(4, o.getMapSize().getY());
         preparedStatement.setInt(5, o.getMaxUser());

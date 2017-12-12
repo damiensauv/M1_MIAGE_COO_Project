@@ -30,7 +30,7 @@ public class GameService {
 
         game.setName(name);
         game.setStatus(false);
-        game.setOwner(null); // a changer
+        game.setOwner(UserService.getInstance().getConnectedUser());
         game.setMapSize(coordonnees);
         game.setMaxUser(maxUser);
         game.setNbInitRes(nbInitRes);
