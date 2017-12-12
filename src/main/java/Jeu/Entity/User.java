@@ -1,6 +1,8 @@
 package Jeu.Entity;
 
 import Jeu.Interface.IUser;
+import Util.Observer;
+import Util.Visitor;
 
 public class User extends AObject implements IUser {
 
@@ -24,6 +26,19 @@ public class User extends AObject implements IUser {
     {
         this.password = password;
         notifier();
+    }
+
+    public void add(Observer o) {
+        obs.add(o);
+    }
+
+    public void notifier() {
+        for (Observer o : obs)
+            o.action(this);
+    }
+
+    public void accept(Visitor v) {
+        v.visiter(this);
     }
 
 }

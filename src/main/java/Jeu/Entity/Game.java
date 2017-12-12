@@ -1,15 +1,20 @@
 package Jeu.Entity;
 
 import Jeu.Interface.IGame;
+import Jeu.Interface.IUser;
+import Util.Observer;
+import Util.UnitOfWork;
+import Util.Visitor;
 
 import java.util.List;
 
 public class Game extends AObject implements IGame {
 
+
     private String name;
     private boolean status;// en cours ou pas
-    private User owner; // Automatic dans les UserInGame ??
-    private User winner;
+    private IUser owner; // Automatic dans les UserInGame ??
+    private IUser winner;
 
     // Game Option
     private Coordonnees mapSize;
@@ -32,20 +37,20 @@ public class Game extends AObject implements IGame {
         notifier();
     }
 
-    public User getOwner() {
+    public IUser getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(IUser owner) {
         this.owner = owner;
         notifier();
     }
 
-    public User getWinner() {
+    public IUser getWinner() {
         return winner;
     }
 
-    public void setWinner(User winner) {
+    public void setWinner(IUser winner) {
         this.winner = winner;
         notifier();
     }
@@ -128,6 +133,20 @@ public class Game extends AObject implements IGame {
 
     public void setName(String name) {
         this.name = name;
+        notifier();
     }
-    
+
+    public void add(Observer o) {
+        this.obs.add(o);
+    }
+
+    public void notifier() {
+        for (Observer o : this.obs)
+            o.action(this);
+    }
+
+    public void accept(Visitor v) {
+        v.visiter(this);
+    }
+
 }
