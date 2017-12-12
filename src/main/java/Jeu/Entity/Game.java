@@ -3,7 +3,6 @@ package Jeu.Entity;
 import Jeu.Interface.IGame;
 import Jeu.Interface.IUser;
 import Util.Observer;
-import Util.UnitOfWork;
 import Util.Visitor;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public class Game extends AObject implements IGame {
 
 
     private String name;
-    private boolean status;// en cours ou pas
+    private boolean status = false;// en cours ou pas
     private IUser owner; // Automatic dans les UserInGame ??
     private IUser winner;
 
@@ -25,7 +24,7 @@ public class Game extends AObject implements IGame {
 
     private Carte carte; // Tout les donnes sur letat de la carte sont dedans
 
-    private Integer currentTurn;
+    private Integer currentTurn = 0;
     private List<User> userInGame; // Table asso Id-Game, Id-User, Point Ressources
 
     public boolean isStatus() {

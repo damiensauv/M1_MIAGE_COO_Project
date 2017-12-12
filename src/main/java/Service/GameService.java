@@ -2,6 +2,7 @@ package Service;
 
 import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
+import Jeu.Interface.IGame;
 import Persistance.DataMapper.GameMapper;
 import Util.UnitOfWork;
 
@@ -25,7 +26,7 @@ public class GameService {
 
     public void createGame(Coordonnees coordonnees, Integer maxUser, Integer nbInitRes, Integer nbResTurn, Integer timeTurn, String name) throws SQLException {
 
-        Game game = new Game();
+        IGame game = new Game();
 
         game.setName(name);
         game.setStatus(false);

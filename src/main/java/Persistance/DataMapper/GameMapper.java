@@ -1,7 +1,13 @@
 package Persistance.DataMapper;
 
+import Jeu.Entity.Carte;
+import Jeu.Entity.Coordonnees;
+import Jeu.Entity.Game;
 import Jeu.Interface.IGame;
+import Jeu.Interface.IUser;
+import Persistance.Factory.UserFactory;
 import Util.UnitOfWork;
+import Util.VirtualProxyGenerique.VirtualProxyBuilder;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,8 +56,25 @@ public class GameMapper extends DataMapper<IGame> {
 
     }
 
-    private IGame createGame(ResultSet rs) {
-        return null;
+    private IGame createGame(ResultSet rs) throws SQLException {
+        IGame game = new Game();
+
+        game.setId(rs.getInt("id"));
+        game.setName(rs.getString("name"));
+        game.setOwner(new VirtualProxyBuilder<IUser>(IUser.class, new UserFactory(rs.getInt("owner"))).getProxy());
+        game.setWinner(new VirtualProxyBuilder<IUser>(IUser.class, new UserFactory(rs.getInt("winner"))).getProxy());
+        Integer x = rs.getInt("map_size_x");
+        Integer y = rs.getInt("map_size_y");
+        game.setMapSize(new Coordonnees(x, y));
+        game.setMaxUser(rs.getInt("max_user"));
+        game.setNbInitRes(rs.getInt("nb_init_res"));
+        game.setNbResTurn(rs.getInt("nb_res_turn"));
+        game.setTimeTurn(rs.getInt("time_turn"));
+        game.setCarte(new Carte(1, 1)); // TODO : A REvoir
+        game.setCurrentTurn(rs.getInt("current_turn"));
+        game.setStatus(rs.getBoolean("status"));
+
+        return game;
     }
 
     public void insert(IGame o) throws SQLException { // passer avec un try catch ici
@@ -71,7 +94,7 @@ public class GameMapper extends DataMapper<IGame> {
         preparedStatement.setInt(9, 1); // a changer !!
         preparedStatement.setBoolean(10, o.isStatus());
 
-        preparedStatement.executeUpdate(); // see code of balla
+        preparedStatement.executeUpdate();
 
         Integer idx = getLastIndexInsert(preparedStatement);
 
@@ -84,14 +107,13 @@ public class GameMapper extends DataMapper<IGame> {
     }
 
     public void update(IGame o) throws SQLException {
-        System.out.println("UPDATE GAME");
+        String query = "UPDATE game SET winner=?, current_turn=?, status=? WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
 
-        /*String query = "UPDATE coo_tp_personne SET nom=?, prenom=?, id_pere=?, eval=? WHERE id=?"; // revoir la requete
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ps.setInt(1, o.getWinner().getId());
+        ps.setInt(2, o.getCurrentTurn());
+        ps.setBoolean(3, o.isStatus());
+        ps.setInt(4, o.getOwner().getId());
 
-    *//*
-        preparedStatement.setString(1, personne.getNom());
-    *//*
-        preparedStatement.executeUpdate();*/
     }
 }
