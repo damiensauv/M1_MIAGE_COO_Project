@@ -36,6 +36,10 @@ public class UserService {
         }
     }
 
+    public void disconet(){
+        connectedUser = null;
+    }
+
     public IUser getConnectedUser() {
         return connectedUser;
     }

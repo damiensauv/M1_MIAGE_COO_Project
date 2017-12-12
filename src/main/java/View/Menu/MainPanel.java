@@ -1,5 +1,6 @@
 package View.Menu;
 
+import Service.UserService;
 import View.utils.MyFrame;
 import View.utils.MyPanel;
 
@@ -41,18 +42,16 @@ public class MainPanel extends MyPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         Object source = e.getSource();
-        if (source == createGameButton){
+        if (source == createGameButton) {
             this.getMyFrame().switchPanel(new CreateGamePanel(this.getMyFrame()));
-        } else if (source == histoGame){
+        } else if (source == histoGame) {
             this.getMyFrame().switchPanel(new HistoGamePanel(this.getMyFrame()));
-        }else if (source == logout){
-
-            // revenir au login && effacer user co
+        } else if (source == logout) {
+            UserService.getInstance().disconet();
             this.getMyFrame().switchPanel(new ConnexionPanel(this.getMyFrame()));
-
-        } else if (source == awaytingGame){
+        } else if (source == awaytingGame) {
             this.getMyFrame().switchPanel(new AwaytingGamePanel(this.getMyFrame()));
-        }else if (source == inProgressGame){
+        } else if (source == inProgressGame) {
             this.getMyFrame().switchPanel(new InProgressGamePanel(this.getMyFrame()));
         }
 
