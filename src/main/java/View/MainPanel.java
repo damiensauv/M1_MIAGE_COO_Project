@@ -18,7 +18,7 @@ public class MainPanel extends MyPanel implements ActionListener {
         createGameButton = new JButton("Crée une Partie");
         histoGame = new JButton("Historique des parties");
         logout = new JButton("deconnexion");
-        awaytingGame = new JButton("Partie en tete");
+        awaytingGame = new JButton("Partie en attente");
         inProgressGame = new JButton("Partie en cours");
 
         createGameButton.addActionListener(this);
