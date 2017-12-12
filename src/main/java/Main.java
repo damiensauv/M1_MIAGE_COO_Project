@@ -1,9 +1,4 @@
-import Jeu.Interface.IUser;
-import Service.GameService;
-import Service.UserService;
-import View.ConnexionFrame;
-
-import javax.swing.*;
+import View.MyFrame;
 
 public class Main {
 
@@ -16,12 +11,9 @@ public class Main {
         GameService gs  = GameService.getInstance();
 
     */
-        ConnexionFrame cf = new ConnexionFrame();
+        new MyFrame();
 
-        cf.setLocationRelativeTo(null);
-        cf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        cf.setVisible(true);
-        cf.setSize(1000, 300);
+
 
 
     }

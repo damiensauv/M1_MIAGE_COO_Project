@@ -5,36 +5,38 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ConnexionFrame extends MyFrame implements ActionListener {
+public class ConnexionPanel extends MyPanel implements ActionListener {
 
     JButton login;
     TextField username;
     TextField password;
-    JPanel panelCo;
 
-    public ConnexionFrame() {
+    public ConnexionPanel(MyFrame frame) {
+        super(frame);
 
         username = new TextField(25);
         password = new TextField(25);
         login = new JButton("Login");
 
-        panelCo = new JPanel();
+        this.add(new JLabel("username : "));
+        this.add(username);
 
-        panelCo.add(new JLabel("username : "));
-        panelCo.add(username);
-
-        panelCo.add(new JLabel("password : "));
-        panelCo.add(password);
-
-        panelCo.add(login);
+        this.add(new JLabel("password : "));
+        this.add(password);
+        this.add(login);
         login.addActionListener(this);
 
-        this.setContentPane(panelCo);
+        // a revoir
+        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
     }
 
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == login) {
+
+            // a revoir pour opti
+            this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
 
             // get username & password
             // call Service

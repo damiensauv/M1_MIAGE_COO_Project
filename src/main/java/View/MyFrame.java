@@ -1,24 +1,29 @@
 package View;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MyFrame extends JFrame {
 
-    JPanel cardpanels;
 
-    public MyFrame()
-    {
-        cardpanels = new JPanel();
-        cardpanels.setLayout(new CardLayout());
+    public MyFrame() {
+
+        this.setTitle("My Game");
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+
+        ConnexionPanel cf = new ConnexionPanel(this);
+        this.add(cf);
+        this.pack();
+
     }
 
-    public JPanel getCardpanels() {
-        return cardpanels;
-    }
+    public void switchPanel(MyPanel panel) {
 
-    public void setCardpanels(JPanel cardpanels) {
-        this.cardpanels = cardpanels;
+        this.setContentPane(panel);
+        this.pack();
+        this.setLocationRelativeTo(null);
+
     }
 
 }
