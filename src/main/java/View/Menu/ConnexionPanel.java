@@ -1,5 +1,6 @@
 package View.Menu;
 
+import Service.UserService;
 import View.utils.MyFrame;
 import View.utils.MyPanel;
 
@@ -34,19 +35,14 @@ public class ConnexionPanel extends MyPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
-        this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
-
-        /*
         if (e.getSource() == login) {
-            // TODO a revoir pour opti
-           boolean c = UserService.getInstance().connexion(this.username.getText(), this.password.getText());
+            boolean c = UserService.getInstance().connexion(this.username.getText(), this.password.getText());
             if (c) {
                 this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
             } else {
-                // TODO dire qu'il y a une erreur
+                JOptionPane.showMessageDialog(this, "Erreur dans le username ou mot de passe !");
             }
         }
-        */
 
     }
 }

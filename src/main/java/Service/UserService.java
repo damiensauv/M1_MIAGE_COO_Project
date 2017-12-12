@@ -24,7 +24,8 @@ public class UserService {
     public boolean connexion(String username, String password) {
 
         connectedUser = UserDataMapper.getInstance().findByUsername(username);
-        // TODO : Return null si pas la !! a gerer
+        if (connectedUser == null)
+            return false;
 
         if (connectedUser.getPassword().equals(password)) {
             System.out.println("Password ok for : " + connectedUser.getUsername());
