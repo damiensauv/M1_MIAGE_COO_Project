@@ -2,6 +2,7 @@ package Service;
 
 import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
+import Jeu.Entity.Status;
 import Jeu.Interface.IGame;
 import Persistance.DataMapper.GameMapper;
 import Util.UnitOfWork;
@@ -29,7 +30,7 @@ public class GameService {
         IGame game = new Game();
 
         game.setName(name);
-        game.setStatus(false);
+        game.setStatus(Status.awayting);
         game.setOwner(UserService.getInstance().getConnectedUser());
         game.setMapSize(coordonnees);
         game.setMaxUser(maxUser);
