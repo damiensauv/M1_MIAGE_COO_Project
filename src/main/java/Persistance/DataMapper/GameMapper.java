@@ -3,9 +3,11 @@ package Persistance.DataMapper;
 import Jeu.Entity.Carte;
 import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
+import Jeu.Entity.Joueur;
 import Jeu.Interface.IGame;
 import Jeu.Interface.IUser;
 import Persistance.Factory.UserFactory;
+import Service.JoueurService;
 import Util.UnitOfWork;
 import Util.VirtualProxyGenerique.VirtualProxyBuilder;
 
@@ -74,7 +76,7 @@ public class GameMapper extends DataMapper<IGame> {
         game.setCurrentTurn(rs.getInt("current_turn"));
         game.setStatus(rs.getBoolean("status"));
 
-//        game.setUserInGame();
+//        game.setUserInGame(); // recup Dans joueur by Game la liste des Joueur, Proxy, Factory!!
 
         return game;
     }
@@ -99,6 +101,10 @@ public class GameMapper extends DataMapper<IGame> {
         preparedStatement.executeUpdate();
 
         Integer idx = getLastIndexInsert(preparedStatement);
+
+        JoueurService.getInstance().createJoueur(o, o.getOwner());
+     //   JoueurService.getInstance().getJoueur(o.getId(), o.getOwner().getId());
+        // call JoueurService(Qui call le JoueurMapper), Create Joueur avc idUser + IdGame, recup le Jouer et le Add dans Game
 
         idMap.put(idx, o);
         o.add(UnitOfWork.getInstance());

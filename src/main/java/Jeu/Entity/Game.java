@@ -122,6 +122,11 @@ public class Game extends AObject implements IGame {
         return userInGame;
     }
 
+    public void addUserInGame(IJoueur joueur){
+        this.userInGame.add(joueur);
+        notifier();
+    }
+
     public void setUserInGame(List<IJoueur> userInGame) {
         this.userInGame = userInGame;
         notifier();

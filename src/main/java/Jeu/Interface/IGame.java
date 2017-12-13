@@ -56,6 +56,8 @@ public interface IGame extends IDomainObject {
 
     public void setCurrentTurn(Integer currentTurn);
 
+    public void addUserInGame(IJoueur joueur);
+
     public List<IJoueur> getUserInGame();
 
     public void setUserInGame(List<IJoueur> userInGame);
