@@ -30,7 +30,10 @@ public class UserMapper extends DataMapper<IUser> {
         return p;
     }
 
-    public IUser find(Integer id) {
+    public IUser find(Object idx) {
+
+        Integer id = (Integer) idx;
+
         IUser p = idMap.get(id);
         if (p != null) {
             System.out.println("Get From IDMAP");
@@ -83,8 +86,8 @@ public class UserMapper extends DataMapper<IUser> {
         }
     }
 
-    void insert(IUser o) {
-
+    public Integer insert(IUser o) {
+        return 0;
     }
 
     void delete(IUser o) {

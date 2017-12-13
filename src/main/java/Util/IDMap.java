@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IDMap<T> {
-    private Map<Integer, WeakReference<T>> map;
+    private Map<Object, WeakReference<T>> map;
 
     public IDMap() {
-        map = new HashMap<Integer, WeakReference<T>>();
+        map = new HashMap<Object, WeakReference<T>>();
     }
 
-    public T get(Integer id) {
+    public T get(Object id) {
         WeakReference<T> ref = map.get(id);
         if (ref == null)
             return null;
@@ -23,11 +23,11 @@ public class IDMap<T> {
         return obj;
     }
 
-    public void put(Integer id, T obj) {
+    public void put(Object id, T obj) {
         map.put(id, new WeakReference<T>(obj));
     }
 
-    void delete(Integer id) {
+    void delete(Object id) {
         map.remove(id);
     }
 }

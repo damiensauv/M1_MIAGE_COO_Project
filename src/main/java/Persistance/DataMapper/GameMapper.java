@@ -5,11 +5,13 @@ import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
 import Jeu.Entity.Joueur;
 import Jeu.Interface.IGame;
+import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
+import Persistance.Factory.JoueurFactory;
 import Persistance.Factory.UserFactory;
-import Service.JoueurService;
 import Util.UnitOfWork;
 import Util.VirtualProxyGenerique.VirtualProxyBuilder;
+import javafx.util.Pair;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +32,10 @@ public class GameMapper extends DataMapper<IGame> {
     private GameMapper() {
     }
 
-    public IGame find(Integer id) {
+    public IGame find(Object idx) {
+
+        Integer id = (Integer) idx;
+
         IGame p = idMap.get(id);
         if (p != null) {
             System.out.println("Get From IDMAP");
@@ -81,7 +86,7 @@ public class GameMapper extends DataMapper<IGame> {
         return game;
     }
 
-    public void insert(IGame o) throws SQLException { // passer avec un try catch ici
+    public Integer insert(IGame o) throws SQLException { // passer avec un try catch ici
 
         String query = "INSERT INTO game(name, owner, map_size_x, map_size_y, max_user, nb_init_res, nb_res_turn, time_turn, carte, status)" +
                 " VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -102,12 +107,18 @@ public class GameMapper extends DataMapper<IGame> {
 
         Integer idx = getLastIndexInsert(preparedStatement);
 
-        JoueurService.getInstance().createJoueur(o, o.getOwner());
-     //   JoueurService.getInstance().getJoueur(o.getId(), o.getOwner().getId());
-        // call JoueurService(Qui call le JoueurMapper), Create Joueur avc idUser + IdGame, recup le Jouer et le Add dans Game
+        o.setId(idx);
+
+        IJoueur joueur = new Joueur(o.getOwner(), o);
+
+        Pair<Integer, Integer> idxJoueur = (Pair<Integer, Integer>) JoueurMapper.getInstance().insert(joueur);
+
+        o.addUserInGame(new VirtualProxyBuilder<IJoueur>(IJoueur.class, new JoueurFactory(idxJoueur)).getProxy());
+
 
         idMap.put(idx, o);
         o.add(UnitOfWork.getInstance());
+        return idx;
     }
 
     public void delete(IGame o) {

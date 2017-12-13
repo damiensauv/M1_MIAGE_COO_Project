@@ -13,12 +13,22 @@ public class Joueur extends AObject implements IJoueur {
 
     // ajouter les infos in Game du player
 
+
+    public Joueur() {
+    }
+
+    public Joueur(IUser user, IGame game) {
+        this.user = user;
+        this.game = game;
+    }
+
     public IUser getUser() {
         return user;
     }
 
     public void setUser(IUser user) {
         this.user = user;
+        notifier();
     }
 
     public IGame getGame() {
@@ -27,6 +37,7 @@ public class Joueur extends AObject implements IJoueur {
 
     public void setGame(IGame game) {
         this.game = game;
+        notifier();
     }
 
     public void add(Observer o) {

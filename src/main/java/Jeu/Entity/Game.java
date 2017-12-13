@@ -6,10 +6,10 @@ import Jeu.Interface.IUser;
 import Util.Observer;
 import Util.Visitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game extends AObject implements IGame {
-
 
     private String name;
     private boolean status = false;// en cours ou pas
@@ -27,6 +27,10 @@ public class Game extends AObject implements IGame {
 
     private Integer currentTurn = 0;
     private List<IJoueur> userInGame; // Table asso Id-Game, Id-User, Point Ressources
+
+    public Game() {
+        userInGame = new ArrayList<IJoueur>();
+    }
 
     public boolean isStatus() {
         return status;
@@ -122,7 +126,7 @@ public class Game extends AObject implements IGame {
         return userInGame;
     }
 
-    public void addUserInGame(IJoueur joueur){
+    public void addUserInGame(IJoueur joueur) {
         this.userInGame.add(joueur);
         notifier();
     }

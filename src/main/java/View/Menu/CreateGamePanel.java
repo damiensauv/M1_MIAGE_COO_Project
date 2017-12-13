@@ -69,6 +69,7 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
 
             try {
                 Coordonnees co = new Coordonnees(Integer.parseInt(mapSizeX.getText()), Integer.parseInt(mapSizeY.getText()));
+
                 Integer maxu = Integer.parseInt(maxUser.getText());
                 Integer nbir = Integer.parseInt(nbInitRes.getText());
                 Integer nbRest = Integer.parseInt(nbResTurn.getText());
@@ -78,7 +79,7 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
                 this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
             } catch (SQLException e1) {
                 e1.printStackTrace();
-            }catch (Exception e2){
+            } catch (Exception e2) {
                 JOptionPane.showMessageDialog(this, "Merci de remplit tout les champs correctement");
             }
         } else if (source == cancel) {
