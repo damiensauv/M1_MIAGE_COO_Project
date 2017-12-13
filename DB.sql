@@ -19,10 +19,15 @@ CREATE TABLE game (
   carte int(11) NOT NULL,
   current_turn int(11) DEFAULT 0,
   status ENUM('awayting','InProgress','finish'),
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (owner) REFERENCES user(id),
+  FOREIGN KEY (winner) REFERENCES user(id)
 );
 
 CREATE TABLE joueur (
   id_user int(11) NOT NULL,
-  id_game int(11) NOT NULL
+  id_game int(11) NOT NULL,
+  PRIMARY KEY (id_user, id_game),
+  FOREIGN KEY (id_user) REFERENCES user(id),
+  FOREIGN KEY (id_game) REFERENCES game(id)
 );
