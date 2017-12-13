@@ -1,9 +1,6 @@
 package Persistance.DataMapper;
 
-import Jeu.Entity.Carte;
-import Jeu.Entity.Coordonnees;
-import Jeu.Entity.Game;
-import Jeu.Entity.Joueur;
+import Jeu.Entity.*;
 import Jeu.Interface.IGame;
 import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
@@ -79,7 +76,7 @@ public class GameMapper extends DataMapper<IGame> {
         game.setTimeTurn(rs.getInt("time_turn"));
         game.setCarte(new Carte(1, 1)); // TODO : A REvoir
         game.setCurrentTurn(rs.getInt("current_turn"));
-        game.setStatus(rs.getBoolean("status"));
+        game.setStatus(Status.valueOf(rs.getString("status")));
 
 //        game.setUserInGame(); // recup Dans joueur by Game la liste des Joueur, Proxy, Factory!!
 
@@ -101,7 +98,7 @@ public class GameMapper extends DataMapper<IGame> {
         preparedStatement.setInt(7, o.getNbResTurn());
         preparedStatement.setInt(8, o.getTimeTurn());
         preparedStatement.setInt(9, 1); // a changer !!
-        preparedStatement.setBoolean(10, o.isStatus());
+        preparedStatement.setString(10, o.getStatus().toString());
 
         preparedStatement.executeUpdate();
 
@@ -131,7 +128,7 @@ public class GameMapper extends DataMapper<IGame> {
 
         ps.setInt(1, o.getWinner().getId());
         ps.setInt(2, o.getCurrentTurn());
-        ps.setBoolean(3, o.isStatus());
+        ps.setString(3, o.getStatus().toString());
         ps.setInt(4, o.getOwner().getId());
 
     }

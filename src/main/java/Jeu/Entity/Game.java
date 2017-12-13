@@ -12,8 +12,8 @@ import java.util.List;
 public class Game extends AObject implements IGame {
 
     private String name;
-    private boolean status = false;// en cours ou pas
-    private IUser owner; // Automatic dans les UserInGame ??
+    private Status status = Status.awayting;
+    private IUser owner;
     private IUser winner;
 
     // Game Option
@@ -32,11 +32,11 @@ public class Game extends AObject implements IGame {
         userInGame = new ArrayList<IJoueur>();
     }
 
-    public boolean isStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
         notifier();
     }

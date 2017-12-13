@@ -18,7 +18,7 @@ CREATE TABLE game (
   time_turn int(11) NOT NULL,
   carte int(11) NOT NULL,
   current_turn int(11) DEFAULT 0,
-  status tinyint(1) NOT NULL,
+  status ENUM('awayting','InProgress','finish'),
   PRIMARY KEY (id)
 );
 
