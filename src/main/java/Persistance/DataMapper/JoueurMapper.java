@@ -42,8 +42,6 @@ public class JoueurMapper extends DataMapper<IJoueur> {
 
         Pair<Integer, Integer> id = (Pair<Integer, Integer>) idx;
 
-        System.out.println("FIND JOUEUR");
-
         IJoueur p = idMap.get(id);
         if (p != null) {
             System.out.println("Get From IDMAP");
@@ -91,10 +89,17 @@ public class JoueurMapper extends DataMapper<IJoueur> {
 
     }
 
-    void update(IJoueur o) throws SQLException {
+    public void update(IJoueur o) throws SQLException {
 
-        System.out.println("UPDATE Joueur");
+        System.out.println("Update Joueur");
 
+        /*
+        String query = "UPDATE joueur SET champ=? WHERE id_user=? AND id_game=?";
+        PreparedStatement ps = connection.prepareStatement(query);
+
+        ps.setInt(1, o.getUser().getId());
+        ps.setInt(2, o.getGame().getId());
+        */
     }
 
 
