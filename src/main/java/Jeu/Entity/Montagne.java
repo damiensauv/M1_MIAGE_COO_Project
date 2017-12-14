@@ -12,4 +12,8 @@ public class Montagne extends Territoire{
 		System.out.print('M');
 		
 	}
+
+	public Type getType() {
+		return Type.montagne;
+	}
 }

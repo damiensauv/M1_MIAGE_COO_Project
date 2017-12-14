@@ -12,4 +12,8 @@ public class Plaine extends Territoire{
 		System.out.print('P');
 		
 	}
+
+	public Type getType() {
+		return Type.plaine;
+	}
 }
