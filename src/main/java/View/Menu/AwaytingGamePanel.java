@@ -1,18 +1,20 @@
 package View.Menu;
 
+import Jeu.Entity.Game;
+import Service.GameService;
 import View.utils.MyFrame;
 import View.utils.MyPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class AwaytingGamePanel extends MyPanel implements ActionListener {
 
     private JButton launch;
     private JButton cancel;
-    private JList<String> listgame;
-
+    private JList<String> jListgame;
 
     public AwaytingGamePanel(MyFrame frame) {
         super(frame);
@@ -25,15 +27,16 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
         launch.addActionListener(this);
         cancel.addActionListener(this);
 
+        List<Game> listGames = GameService.getInstance().getAwaytingGame(); // TODO check nbPlace after
+
         DefaultListModel<String> listModel = new DefaultListModel<String>();
-        listModel.addElement("USA");
-        listModel.addElement("India");
-        listModel.addElement("Vietnam");
 
-        listgame = new JList<String>(listModel);
-        this.add(listgame);
+        for (Game game : listGames) {
+            listModel.addElement(game.getName());
+        }
 
-
+        jListgame = new JList<String>(listModel);
+        this.add(jListgame);
 
     }
 

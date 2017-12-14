@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class GameMapper extends DataMapper<IGame> {
 
@@ -77,7 +78,7 @@ public class GameMapper extends DataMapper<IGame> {
         game.setCurrentTurn(rs.getInt("current_turn"));
         game.setStatus(Status.valueOf(rs.getString("status")));
 
-//        game.setUserInGame(); // recup Dans joueur by Game la liste des Joueur, Proxy, Factory!!
+//    TODO    game.setUserInGame(); // recup Dans joueur by Game la liste des Joueur, Proxy, Factory!!
 
         return game;
     }
@@ -129,5 +130,18 @@ public class GameMapper extends DataMapper<IGame> {
         ps.setString(3, o.getStatus().toString());
         ps.setInt(4, o.getOwner().getId());
 
+    }
+
+    public List<Game> findAllGamesByStatus() {
+
+        // select * by status
+        /* TODO
+            // check if is in IDMAP
+            // if not create, and add it on
+            // return List
+         */
+
+
+        return null;
     }
 }

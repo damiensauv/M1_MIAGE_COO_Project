@@ -58,7 +58,7 @@ public class GameService {
     }
 
     public List<Game> getAwaytingGame() {
-        return null;
+        return GameMapper.getInstance().findAllGamesByStatus();
     }
 
 }
