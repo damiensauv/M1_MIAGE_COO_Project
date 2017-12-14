@@ -1,39 +1,56 @@
 package Jeu.Entity;
 
-public class Armee {
+import Jeu.Interface.IArmee;
+import Jeu.Interface.ICarte;
+import Jeu.Interface.IJoueur;
+import Util.Observer;
+import Util.Visitor;
 
-	private Joueur joueur;
-	private Coordonnees coordonnees;
-	
-	
-	public Armee(Joueur joueur, Coordonnees coordonnees) {
-		super();
-		this.joueur = joueur;
-		this.coordonnees = coordonnees;
-	}
+public class Armee extends AObject implements IArmee {
 
+    private ICarte carte;
+    private IJoueur joueur;
+    private Coordonnees coordonnees;
 
-	public Joueur getJoueur() {
-		return joueur;
-	}
+    public Armee(IJoueur joueur, Coordonnees coordonnees) {
+        this.joueur = joueur;
+        this.coordonnees = coordonnees;
+    }
 
+    public Coordonnees getCoordonnees() {
+        return coordonnees;
+    }
 
-	public void setJoueur(Joueur joueur) {
-		this.joueur = joueur;
-	}
+    public void setCoordonnees(Coordonnees coordonnees) {
+        this.coordonnees = coordonnees;
+    }
 
+    public ICarte getCarte() {
+        return carte;
+    }
 
-	public Coordonnees getCoordonnees() {
-		return coordonnees;
-	}
+    public void setCarte(ICarte carte) {
+        this.carte = carte;
+    }
 
+    public IJoueur getJoueur() {
+        return joueur;
+    }
 
-	public void setCoordonnees(Coordonnees coordonnees) {
-		this.coordonnees = coordonnees;
-	}
-	
-	
-	
-	
-	
+    public void setJoueur(IJoueur joueur) {
+        this.joueur = joueur;
+    }
+
+    public void add(Observer o) {
+        obs.add(o);
+    }
+
+    public void notifier() {
+        for (Observer o : obs)
+            o.action(this);
+    }
+
+    public void accept(Visitor v) {
+        v.visiter(this);
+    }
 }
