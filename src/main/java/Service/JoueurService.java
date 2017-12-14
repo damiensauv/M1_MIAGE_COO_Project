@@ -23,6 +23,7 @@ public class JoueurService {
 
     }
 
+<<<<<<< HEAD
     public void createJoueur(IGame game, IUser user) throws SQLException {
 
         Joueur joueur = new Joueur();
@@ -39,4 +40,6 @@ public class JoueurService {
         IJoueur joueur = JoueurMapper.getInstance().findByGameAndUser(id_game, id_user);
         return joueur;
     }
+=======
+>>>>>>> f0d8b70298deb69b421bab90f09156dfdd23e86e
 }

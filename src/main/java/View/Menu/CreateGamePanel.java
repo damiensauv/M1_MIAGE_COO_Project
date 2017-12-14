@@ -68,17 +68,18 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
         if (source == confirm) {
 
             try {
-                Coordonnees co = new Coordonnees(Integer.parseInt(mapSizeX.getText()), Integer.parseInt(mapSizeY.getText()));
-                Integer maxu = Integer.parseInt(maxUser.getText());
-                Integer nbir = Integer.parseInt(nbInitRes.getText());
-                Integer nbRest = Integer.parseInt(nbResTurn.getText());
-                Integer tt = Integer.parseInt(timeTurn.getText());
+                Coordonnees co = new Coordonnees(Integer.parseInt(mapSizeX.getText().trim()), Integer.parseInt(mapSizeY.getText().trim()));
 
-                GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText());
+                Integer maxu = Integer.parseInt(maxUser.getText().trim());
+                Integer nbir = Integer.parseInt(nbInitRes.getText().trim());
+                Integer nbRest = Integer.parseInt(nbResTurn.getText().trim());
+                Integer tt = Integer.parseInt(timeTurn.getText().trim());
+
+                GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText().trim());
                 this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
             } catch (SQLException e1) {
                 e1.printStackTrace();
-            }catch (Exception e2){
+            } catch (Exception e2) {
                 JOptionPane.showMessageDialog(this, "Merci de remplit tout les champs correctement");
             }
         } else if (source == cancel) {

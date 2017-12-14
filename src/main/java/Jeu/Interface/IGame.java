@@ -2,6 +2,7 @@ package Jeu.Interface;
 
 import Jeu.Entity.Carte;
 import Jeu.Entity.Coordonnees;
+import Jeu.Entity.Status;
 import Util.IDomainObject;
 
 import java.util.List;
@@ -16,9 +17,9 @@ public interface IGame extends IDomainObject {
 
     public void setName(String name);
 
-    public boolean isStatus();
+    public Status getStatus();
 
-    public void setStatus(boolean status);
+    public void setStatus(Status status);
 
     public IUser getOwner();
 

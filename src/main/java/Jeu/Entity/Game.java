@@ -6,14 +6,14 @@ import Jeu.Interface.IUser;
 import Util.Observer;
 import Util.Visitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game extends AObject implements IGame {
 
-
     private String name;
-    private boolean status = false;// en cours ou pas
-    private IUser owner; // Automatic dans les UserInGame ??
+    private Status status = Status.awayting;
+    private IUser owner;
     private IUser winner;
 
     // Game Option
@@ -28,11 +28,15 @@ public class Game extends AObject implements IGame {
     private Integer currentTurn = 0;
     private List<IJoueur> userInGame; // Table asso Id-Game, Id-User, Point Ressources
 
-    public boolean isStatus() {
+    public Game() {
+        userInGame = new ArrayList<IJoueur>();
+    }
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
         notifier();
     }
@@ -122,7 +126,7 @@ public class Game extends AObject implements IGame {
         return userInGame;
     }
 
-    public void addUserInGame(IJoueur joueur){
+    public void addUserInGame(IJoueur joueur) {
         this.userInGame.add(joueur);
         notifier();
     }

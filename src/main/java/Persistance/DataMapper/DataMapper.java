@@ -22,20 +22,18 @@ public abstract class DataMapper<T> {
         }
     }
 
-    abstract T find(Integer id);
+    abstract T find(Object id);
 
-    abstract void insert(T o) throws SQLException;
+    abstract Object insert(T o) throws SQLException;
 
     abstract void delete(T o);
 
     abstract void update(T o) throws SQLException;
 
-    public Integer getLastIndexInsert(PreparedStatement ps)
-    {
+    public Integer getLastIndexInsert(PreparedStatement ps) {
         try {
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next())
-            {
+            if (rs.next()) {
                 return rs.getInt(1);
             }
         } catch (SQLException e) {
