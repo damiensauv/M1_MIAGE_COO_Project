@@ -2,6 +2,7 @@ package View.Menu;
 
 import Jeu.Entity.Game;
 import Service.GameService;
+import View.Game.CartePanel;
 import View.utils.MyFrame;
 import View.utils.MyPanel;
 
@@ -27,8 +28,8 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
         launch.addActionListener(this);
         cancel.addActionListener(this);
 
-        List<Game> listGames = GameService.getInstance().getAwaytingGame(); // TODO check nbPlace after
-
+        /*
+        List<Game> listGames = GameService.getInstance().getAwaytingGame(); // TODO check nbPlace after, and le return null des game!
         DefaultListModel<String> listModel = new DefaultListModel<String>();
 
         for (Game game : listGames) {
@@ -37,13 +38,16 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
 
         jListgame = new JList<String>(listModel);
         this.add(jListgame);
-
+        */
     }
 
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == launch) {
-            // launch game
+
+            this.getMyFrame().switchPanel(new CartePanel(this.getMyFrame()));
+
+
         } else if (e.getSource() == cancel) {
             this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
         }

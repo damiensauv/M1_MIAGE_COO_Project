@@ -35,14 +35,16 @@ public class ConnexionPanel extends MyPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
+        this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
+        /*
         if (e.getSource() == login) {
             boolean c = UserService.getInstance().connexion(this.username.getText().trim(), this.password.getText().trim());
             if (c) {
-                this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
+
             } else {
                 JOptionPane.showMessageDialog(this, "Erreur dans le username ou mot de passe !");
             }
         }
-
+*/
     }
 }
