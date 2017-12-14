@@ -13,7 +13,6 @@ public class Joueur extends AObject implements IJoueur {
 
     // ajouter les infos in Game du player
 
-
     public Joueur() {
     }
 

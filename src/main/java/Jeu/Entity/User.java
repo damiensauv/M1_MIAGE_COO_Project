@@ -22,8 +22,7 @@ public class User extends AObject implements IUser {
         return this.password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
         notifier();
     }

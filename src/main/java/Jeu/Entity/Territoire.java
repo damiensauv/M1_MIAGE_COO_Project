@@ -2,26 +2,12 @@ package Jeu.Entity;
 
 public abstract class Territoire {
 
-    private Ville ville;
     private Coordonnees coordonnees;
-    private Integer nbArmee;
-	private Type type;
 
-    // Quand on génère un territoire, il n'y a pas de ville implantée de base
+    private Type type;
 
     public Territoire(Coordonnees coordonnees) {
-        super();
         this.coordonnees = coordonnees;
-        this.ville = null;
-    }
-
-    public Ville getVille() {
-        return ville;
-    }
-
-    // On assigne un joueur directement pour déclarer l'existence de la ville
-    public void setVille(Joueur j) {
-        this.ville = new Ville(j);
     }
 
     public Coordonnees getCoordonnees() {
@@ -32,12 +18,12 @@ public abstract class Territoire {
         this.coordonnees = coordonnees;
     }
 
-    public void supprimerVille() {
-
-        this.ville = null;
-    }
-
     public abstract void AfficherTypeTerritoire();
 
     public abstract Type getType();
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
 }
