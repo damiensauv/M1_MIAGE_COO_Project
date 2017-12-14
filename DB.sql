@@ -43,11 +43,15 @@ CREATE TABLE carte (
 CREATE TABLE ville(
   id int(11) NOT NULL AUTO_INCREMENT,
   id_carte int(11) NOT NULL,
-  id_joueur int(11) NOT NULL
+  id_joueur int(11) NOT NULL,
+  x int(11) NOT NULL,
+  y int(11) NOT NULL
 );
 
 CREATE TABLE armee(
   id int(11) NOT NULL AUTO_INCREMENT,
   id_carte int(11) NOT NULL,
-  id_joueur int(11) NOT NULL
+  id_joueur int(11) NOT NULL,
+  x int(11) NOT NULL,
+  y int(11) NOT NULL
 );
