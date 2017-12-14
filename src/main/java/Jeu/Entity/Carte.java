@@ -52,6 +52,7 @@ public class Carte extends AObject implements ICarte {
             default:
                 break;
         }
+        notifier();
     }
 
     public Territoire[][] getCarte() {
@@ -60,6 +61,7 @@ public class Carte extends AObject implements ICarte {
 
     public void setCarte(Territoire[][] carte) {
         this.carte = carte;
+        notifier();
     }
 
     public List<Ville> getListeVilles() {
@@ -68,10 +70,12 @@ public class Carte extends AObject implements ICarte {
 
     public void addVille(Ville ville) {
         this.listeVilles.add(ville);
+        notifier();
     }
 
     public void setListeVilles(List<Ville> listeVilles) {
         this.listeVilles = listeVilles;
+        notifier();
     }
 
     public List<Armee> getListeArmee() {
@@ -80,10 +84,12 @@ public class Carte extends AObject implements ICarte {
 
     public void addArmee(Armee armee) {
         this.listeArmee.add(armee);
+        notifier();
     }
 
     public void setListeArmee(List<Armee> listeArmee) {
         this.listeArmee = listeArmee;
+        notifier();
     }
 
     public void AfficherCarteDebug() {
