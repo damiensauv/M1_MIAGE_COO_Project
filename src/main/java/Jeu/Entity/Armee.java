@@ -24,6 +24,7 @@ public class Armee extends AObject implements IArmee {
 
     public void setCoordonnees(Coordonnees coordonnees) {
         this.coordonnees = coordonnees;
+        notifier();
     }
 
     public ICarte getCarte() {
@@ -32,6 +33,7 @@ public class Armee extends AObject implements IArmee {
 
     public void setCarte(ICarte carte) {
         this.carte = carte;
+        notifier();
     }
 
     public IJoueur getJoueur() {
@@ -40,6 +42,7 @@ public class Armee extends AObject implements IArmee {
 
     public void setJoueur(IJoueur joueur) {
         this.joueur = joueur;
+        notifier();
     }
 
     public void add(Observer o) {
