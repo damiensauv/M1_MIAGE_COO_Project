@@ -12,7 +12,8 @@ public class Armee extends AObject implements IArmee {
     private IJoueur joueur;
     private Coordonnees coordonnees;
 
-    public Armee(IJoueur joueur, Coordonnees coordonnees) {
+    public Armee(ICarte carte, IJoueur joueur, Coordonnees coordonnees) {
+        this.carte = carte;
         this.joueur = joueur;
         this.coordonnees = coordonnees;
     }
