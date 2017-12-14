@@ -31,3 +31,23 @@ CREATE TABLE joueur (
   FOREIGN KEY (id_user) REFERENCES user(id),
   FOREIGN KEY (id_game) REFERENCES game(id)
 );
+
+CREATE TABLE carte (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  x int(11) NOT NULL,
+  y int(11) NOT NULL,
+  type ENUM('plaine', 'champs', 'montagne'),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE ville(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  id_carte int(11) NOT NULL,
+  id_joueur int(11) NOT NULL
+);
+
+CREATE TABLE armee(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  id_carte int(11) NOT NULL,
+  id_joueur int(11) NOT NULL
+);
