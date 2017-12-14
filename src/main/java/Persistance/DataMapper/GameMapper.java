@@ -8,7 +8,6 @@ import Persistance.Factory.JoueurFactory;
 import Persistance.Factory.UserFactory;
 import Util.UnitOfWork;
 import Util.VirtualProxyGenerique.VirtualProxyBuilder;
-import javafx.util.Pair;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -108,10 +107,9 @@ public class GameMapper extends DataMapper<IGame> {
 
         IJoueur joueur = new Joueur(o.getOwner(), o);
 
-        Pair<Integer, Integer> idxJoueur = (Pair<Integer, Integer>) JoueurMapper.getInstance().insert(joueur);
+        Integer[] idxJoueur = (Integer[]) JoueurMapper.getInstance().insert(joueur);
 
         o.addUserInGame(new VirtualProxyBuilder<IJoueur>(IJoueur.class, new JoueurFactory(idxJoueur)).getProxy());
-
 
         idMap.put(idx, o);
         o.add(UnitOfWork.getInstance());

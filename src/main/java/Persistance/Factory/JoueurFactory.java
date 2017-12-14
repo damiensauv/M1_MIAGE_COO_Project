@@ -2,13 +2,13 @@ package Persistance.Factory;
 
 import Jeu.Interface.IJoueur;
 import Persistance.DataMapper.JoueurMapper;
-import javafx.util.Pair;
+
 
 public class JoueurFactory implements Factory<IJoueur> {
 
-    private Pair<Integer, Integer> id;
+    private Integer[] id;
 
-    public JoueurFactory(Pair<Integer, Integer> id) {
+    public JoueurFactory(Integer[] id) {
         this.id = id;
     }
 

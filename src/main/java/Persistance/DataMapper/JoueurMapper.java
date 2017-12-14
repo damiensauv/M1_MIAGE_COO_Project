@@ -8,11 +8,14 @@ import Persistance.Factory.GameFactory;
 import Persistance.Factory.UserFactory;
 import Util.UnitOfWork;
 import Util.VirtualProxyGenerique;
-import javafx.util.Pair;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.AbstractMap;
+
+
+
 
 public class JoueurMapper extends DataMapper<IJoueur> {
 
@@ -40,7 +43,7 @@ public class JoueurMapper extends DataMapper<IJoueur> {
 
     public IJoueur find(Object idx) {
 
-        Pair<Integer, Integer> id = (Pair<Integer, Integer>) idx;
+        Integer[] id = (Integer[]) idx;
 
         IJoueur p = idMap.get(id);
         if (p != null) {
@@ -51,8 +54,8 @@ public class JoueurMapper extends DataMapper<IJoueur> {
         String req = "SELECT * FROM joueur WHERE id_user=? AND id_game=?";
         try {
             PreparedStatement ps = connection.prepareStatement(req);
-            ps.setInt(1, id.getKey());
-            ps.setInt(2, id.getValue());
+            ps.setInt(1, id[0]);
+            ps.setInt(2, id[1]);
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) { // TODO : LEVER une exception
                 System.out.println("not in bd " + id);
@@ -78,7 +81,9 @@ public class JoueurMapper extends DataMapper<IJoueur> {
         preparedStatement.setInt(2, o.getGame().getId());
         preparedStatement.executeUpdate();
 
-        Pair<Integer, Integer> idx = new Pair<Integer, Integer>(o.getUser().getId(), o.getGame().getId());
+        Integer[] idx = new Integer[2];
+        idx[0] = o.getUser().getId();
+        idx[1] = o.getGame().getId();
 
         idMap.put(idx, o);
         o.add(UnitOfWork.getInstance());
