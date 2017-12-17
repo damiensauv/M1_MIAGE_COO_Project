@@ -1,5 +1,6 @@
 package Jeu.Entity;
 
+import Jeu.Interface.ICarte;
 import Jeu.Interface.IGame;
 import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
@@ -23,7 +24,7 @@ public class Game extends AObject implements IGame {
     private Integer NbResTurn;
     private Integer timeTurn;
 
-    private Carte carte; // Tout les donnes sur letat de la carte sont dedans
+    private ICarte carte; // Tout les donnes sur letat de la carte sont dedans
 
     private Integer currentTurn = 0;
     private List<IJoueur> userInGame; // Table asso Id-Game, Id-User, Point Ressources
@@ -104,11 +105,11 @@ public class Game extends AObject implements IGame {
         notifier();
     }
 
-    public Carte getCarte() {
+    public ICarte getCarte() {
         return carte;
     }
 
-    public void setCarte(Carte carte) {
+    public void setCarte(ICarte carte) {
         this.carte = carte;
         notifier();
     }

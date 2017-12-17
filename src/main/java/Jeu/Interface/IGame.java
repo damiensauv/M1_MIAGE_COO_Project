@@ -49,9 +49,9 @@ public interface IGame extends IDomainObject {
 
     public void setTimeTurn(Integer timeTurn);
 
-    public Carte getCarte();
+    public ICarte getCarte();
 
-    public void setCarte(Carte carte);
+    public void setCarte(ICarte carte);
 
     public Integer getCurrentTurn();
 

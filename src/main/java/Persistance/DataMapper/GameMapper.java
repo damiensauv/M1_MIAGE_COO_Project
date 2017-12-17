@@ -4,15 +4,19 @@ import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
 import Jeu.Entity.Joueur;
 import Jeu.Entity.Status;
+import Jeu.Interface.ICarte;
 import Jeu.Interface.IGame;
 import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
+import Persistance.Factory.CarteFactory;
 import Persistance.Factory.JoueurFactory;
+import Persistance.Factory.ListUserInGameFactory;
 import Persistance.Factory.UserFactory;
 import Util.UnitOfWork;
 import Util.VirtualProxyGenerique.VirtualProxyBuilder;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameMapper extends DataMapper<IGame> {
@@ -74,11 +78,10 @@ public class GameMapper extends DataMapper<IGame> {
         game.setNbInitRes(rs.getInt("nb_init_res"));
         game.setNbResTurn(rs.getInt("nb_res_turn"));
         game.setTimeTurn(rs.getInt("time_turn"));
-//        game.setCarte(new Carte(1, 1)); // TODO : A REvoir
+        game.setCarte(new VirtualProxyBuilder<ICarte>(ICarte.class, new CarteFactory(rs.getInt("carte"))).getProxy());
         game.setCurrentTurn(rs.getInt("current_turn"));
         game.setStatus(Status.valueOf(rs.getString("status")));
-
-//    TODO    game.setUserInGame(); // recup Dans joueur by Game la liste des Joueur, Proxy, Factory!!
+        game.setUserInGame(new VirtualProxyBuilder<List<IJoueur>>(List.class, new ListUserInGameFactory(rs.getInt("id"))).getProxy());
 
         return game;
     }
@@ -136,19 +139,36 @@ public class GameMapper extends DataMapper<IGame> {
         ps.setInt(4, o.getId());
         ps.setInt(5, o.getId());
         ps.executeUpdate();
-
     }
 
-    public List<Game> findAllGamesByStatus() {
+    public List<IGame> findAllGamesByStatusAndPlaceFree() {
 
-        // select * by status
-        /* TODO
-            // check if is in IDMAP
-            // if not create, and add it on
-            // return List
-         */
+        List<IGame> listGames = new ArrayList<IGame>();
+        String req = "SELECT * FROM game WHERE status = 'awayting'";
 
+        try {
+            PreparedStatement ps = connection.prepareStatement(req);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) { // TODO : LEVER une exception
+                System.out.println("not in bd ");
+                return null;
+            }
 
-        return null;
+            while (rs.next()) {
+                IGame g = createGame(rs);
+                IGame p = idMap.get(g.getId());
+                if (p == null) {
+                    idMap.put(g.getId(), g);
+                    g.add(UnitOfWork.getInstance());
+                }
+                listGames.add(g);
+            }
+
+            return listGames;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -59,8 +59,8 @@ public class GameService {
         return null;
     }
 
-    public List<Game> getAwaytingGame() {
-        return GameMapper.getInstance().findAllGamesByStatus();
+    public List<IGame> getAwaytingGame() {
+        return GameMapper.getInstance().findAllGamesByStatusAndPlaceFree();
     }
 
 }

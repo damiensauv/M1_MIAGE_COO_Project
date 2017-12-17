@@ -12,9 +12,8 @@ import Util.VirtualProxyGenerique;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.AbstractMap;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class JoueurMapper extends DataMapper<IJoueur> {
@@ -108,4 +107,32 @@ public class JoueurMapper extends DataMapper<IJoueur> {
     }
 
 
+    public List<IJoueur> findAllJoueurInGame(int id) {
+        String req = "SELECT * FROM joueur WHERE id_game=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                System.out.println("not in bd " + id);
+                return null;
+            }
+
+            List<IJoueur> lists = new ArrayList<IJoueur>();
+
+            while (rs.next()) {
+                IJoueur g = createJoueur(rs);
+                IJoueur p = idMap.get(g.getId());
+                if (p == null) {
+                    idMap.put(g.getId(), g);
+                    g.add(UnitOfWork.getInstance());
+                }
+                lists.add(g);
+            }
+            return lists;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
