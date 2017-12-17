@@ -141,7 +141,7 @@ public class GameMapper extends DataMapper<IGame> {
         ps.executeUpdate();
     }
 
-    public List<IGame> findAllGamesByStatusAndPlaceFree() {
+    public List<IGame> findAllGamesByStatus() {
 
         List<IGame> listGames = new ArrayList<IGame>();
         String req = "SELECT * FROM game WHERE status = 'awayting'";

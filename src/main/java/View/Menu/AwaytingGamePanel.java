@@ -29,7 +29,7 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
         launch.addActionListener(this);
         cancel.addActionListener(this);
 
-        List<IGame> listGames = GameService.getInstance().getAwaytingGame(); // TODO check nbPlace after, and le return null des game!
+        List<IGame> listGames = GameService.getInstance().getAwaytingGame();
         DefaultListModel<String> listModel = new DefaultListModel<String>();
 
         for (IGame game : listGames) {
