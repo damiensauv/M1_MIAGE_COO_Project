@@ -10,23 +10,23 @@ import java.util.List;
 
 public interface ICarte extends IDomainObject {
 
-    void setTerritoire(Coordonnees coord, int type);
+    public void setTerritoire(Coordonnees coord, int type);
 
-    Territoire[][] getCarte();
+    public Territoire[][] getCarte();
 
-    void setCarte(Territoire[][] carte);
+    public void setCarte(Territoire[][] carte);
 
-    List<Ville> getListeVilles();
+    public List<Ville> getListeVilles();
 
-    void addVille(Ville ville);
+    public void addVille(Ville ville);
 
-    void setListeVilles(List<Ville> listeVilles);
+    public void setListeVilles(List<Ville> listeVilles);
 
-    List<Armee> getListeArmee();
+    public List<Armee> getListeArmee();
 
-    void addArmee(Armee armee);
+    public void addArmee(Armee armee);
 
-    void setListeArmee(List<Armee> listeArmee);
+    public void setListeArmee(List<Armee> listeArmee);
 
-    void AfficherCarteDebug();
+    public void AfficherCarteDebug();
 }

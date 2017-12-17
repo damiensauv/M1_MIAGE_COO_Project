@@ -38,9 +38,11 @@ public class GameService {
         game.setNbInitRes(nbInitRes);
         game.setTimeTurn(timeTurn);
         game.setNbResTurn(nbResTurn);
-        game.setCarte(null); // A changer
 
-        GameMapper.getInstance().insert(game);
+        Integer idx = GameMapper.getInstance().insert(game);
+
+        game.setCarte(CarteService.getInstance().createCarte(coordonnees, idx));
+
         UnitOfWork.getInstance().commit();
     }
 

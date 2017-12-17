@@ -14,9 +14,10 @@ public class Carte extends AObject implements ICarte {
     private List<Ville> listeVilles;
     private List<Armee> listeArmee;
 
-    // TODO : revoir le constuctor
-    public Carte(int sizeX, int sizeY) {
+    public Carte(Coordonnees coo) {
         int randomInt;
+        int sizeX = coo.getX();
+        int sizeY = coo.getY();
 
         this.listeArmee = new ArrayList<Armee>();
         this.listeVilles = new ArrayList<Ville>();
@@ -27,8 +28,8 @@ public class Carte extends AObject implements ICarte {
         Random randomGenerator = new Random();
 
         // On crée la carte ligne par ligne
-        for (int i = 0; i < sizeY; i++) {
-            for (int j = 0; j < sizeX; j++) {
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
                 randomInt = randomGenerator.nextInt(3);
                 this.setTerritoire(new Coordonnees(i, j), randomInt);
             }

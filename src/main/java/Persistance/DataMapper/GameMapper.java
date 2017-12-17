@@ -1,6 +1,9 @@
 package Persistance.DataMapper;
 
-import Jeu.Entity.*;
+import Jeu.Entity.Coordonnees;
+import Jeu.Entity.Game;
+import Jeu.Entity.Joueur;
+import Jeu.Entity.Status;
 import Jeu.Interface.IGame;
 import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
@@ -9,10 +12,7 @@ import Persistance.Factory.UserFactory;
 import Util.UnitOfWork;
 import Util.VirtualProxyGenerique.VirtualProxyBuilder;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 public class GameMapper extends DataMapper<IGame> {
@@ -74,7 +74,7 @@ public class GameMapper extends DataMapper<IGame> {
         game.setNbInitRes(rs.getInt("nb_init_res"));
         game.setNbResTurn(rs.getInt("nb_res_turn"));
         game.setTimeTurn(rs.getInt("time_turn"));
-        game.setCarte(new Carte(1, 1)); // TODO : A REvoir
+//        game.setCarte(new Carte(1, 1)); // TODO : A REvoir
         game.setCurrentTurn(rs.getInt("current_turn"));
         game.setStatus(Status.valueOf(rs.getString("status")));
 
@@ -85,8 +85,8 @@ public class GameMapper extends DataMapper<IGame> {
 
     public Integer insert(IGame o) throws SQLException { // passer avec un try catch ici
 
-        String query = "INSERT INTO game(name, owner, map_size_x, map_size_y, max_user, nb_init_res, nb_res_turn, time_turn, carte, status)" +
-                " VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO game(name, owner, map_size_x, map_size_y, max_user, nb_init_res, nb_res_turn, time_turn, status)" +
+                " VALUES (?,?,?,?,?,?,?,?,?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, o.getName());
@@ -97,8 +97,7 @@ public class GameMapper extends DataMapper<IGame> {
         preparedStatement.setInt(6, o.getNbInitRes());
         preparedStatement.setInt(7, o.getNbResTurn());
         preparedStatement.setInt(8, o.getTimeTurn());
-        preparedStatement.setInt(9, 1); // a changer !!
-        preparedStatement.setString(10, o.getStatus().toString());
+        preparedStatement.setString(9, o.getStatus().toString());
 
         preparedStatement.executeUpdate();
 
@@ -122,13 +121,21 @@ public class GameMapper extends DataMapper<IGame> {
     }
 
     public void update(IGame o) throws SQLException {
-        String query = "UPDATE game SET winner=?, current_turn=?, status=? WHERE id = ?";
+        String query = "UPDATE game SET winner=?, current_turn=?, status=?, carte=? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
 
-        ps.setInt(1, o.getWinner().getId());
+        System.out.println("UPDATE GAME : " + o.getId());
+
+        if (o.getWinner() == null)
+            ps.setNull(1, Types.NULL);
+        else
+            ps.setInt(1, o.getWinner().getId());
+
         ps.setInt(2, o.getCurrentTurn());
         ps.setString(3, o.getStatus().toString());
-        ps.setInt(4, o.getOwner().getId());
+        ps.setInt(4, o.getId());
+        ps.setInt(5, o.getId());
+        ps.executeUpdate();
 
     }
 

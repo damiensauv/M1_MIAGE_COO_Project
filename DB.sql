@@ -16,7 +16,7 @@ CREATE TABLE game (
   nb_init_res int(11) NOT NULL,
   nb_res_turn int(11) NOT NULL,
   time_turn int(11) NOT NULL,
-  carte int(11) NOT NULL,
+  carte int(11) DEFAULT NULL,
   current_turn int(11) DEFAULT 0,
   status ENUM('awayting','InProgress','finish'),
   PRIMARY KEY (id),
@@ -33,11 +33,11 @@ CREATE TABLE joueur (
 );
 
 CREATE TABLE carte (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  id int(11) NOT NULL,
   x int(11) NOT NULL,
   y int(11) NOT NULL,
   type ENUM('plaine', 'champs', 'montagne'),
-  PRIMARY KEY (id)
+  FOREIGN KEY (id) REFERENCES game(id)
 );
 
 CREATE TABLE ville(
@@ -45,7 +45,8 @@ CREATE TABLE ville(
   id_carte int(11) NOT NULL,
   id_joueur int(11) NOT NULL,
   x int(11) NOT NULL,
-  y int(11) NOT NULL
+  y int(11) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE armee(
@@ -53,5 +54,6 @@ CREATE TABLE armee(
   id_carte int(11) NOT NULL,
   id_joueur int(11) NOT NULL,
   x int(11) NOT NULL,
-  y int(11) NOT NULL
+  y int(11) NOT NULL,
+  PRIMARY KEY (id)
 );

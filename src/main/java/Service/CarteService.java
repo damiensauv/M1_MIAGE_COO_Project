@@ -1,5 +1,12 @@
 package Service;
 
+import Jeu.Entity.Carte;
+import Jeu.Entity.Coordonnees;
+import Persistance.DataMapper.CarteMapper;
+import Util.UnitOfWork;
+
+import java.sql.SQLException;
+
 public class CarteService {
 
     private static CarteService instance = null;
@@ -15,9 +22,16 @@ public class CarteService {
 
     }
 
-    public void createCarte(int x, int y){
+    public Carte createCarte(Coordonnees coordonnees, Integer idx) {
 
+        Carte carte = new Carte(coordonnees);
+
+        try {
+            CarteMapper.getInstance().insert(carte, idx);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        UnitOfWork.getInstance().commit();
+        return carte;
     }
-
-
 }
