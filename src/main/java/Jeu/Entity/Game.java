@@ -23,6 +23,7 @@ public class Game extends AObject implements IGame {
     private Integer NbInitRes;
     private Integer NbResTurn;
     private Integer timeTurn;
+    private Integer distanceMinVille;
 
     private ICarte carte; // Tout les donnes sur letat de la carte sont dedans
 
@@ -162,5 +163,14 @@ public class Game extends AObject implements IGame {
     @Override
     public String toString() {
         return name + " | [" + this.userInGame.size() + "/" + maxUser +"]";
+    }
+
+    public Integer getDistanceMinVille() {
+        return distanceMinVille;
+    }
+
+    public void setDistanceMinVille(Integer distanceMinVille) {
+        this.distanceMinVille = distanceMinVille;
+        notifier();
     }
 }

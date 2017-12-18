@@ -13,6 +13,7 @@ CREATE TABLE game (
   map_size_x int(11) NOT NULL,
   map_size_y int(11) NOT NULL,
   max_user int(11) NOT NULL,
+  distance_min_ville int(11) NOT NULL,
   nb_init_res int(11) NOT NULL,
   nb_res_turn int(11) NOT NULL,
   time_turn int(11) NOT NULL,

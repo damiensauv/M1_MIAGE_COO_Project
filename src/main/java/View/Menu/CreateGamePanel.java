@@ -23,7 +23,7 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
     private TextField nbInitRes;
     private TextField nbResTurn;
     private TextField timeTurn;
-
+    private TextField distancemin;
 
     public CreateGamePanel(MyFrame myFrame) {
         super(myFrame);
@@ -36,7 +36,9 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
         maxUser = new TextField(25);
         nbInitRes = new TextField(25);
         nbResTurn = new TextField(25);
+        distancemin = new TextField(25);
         timeTurn = new TextField(25);
+
 
         confirm.addActionListener(this);
         cancel.addActionListener(this);
@@ -55,6 +57,8 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
         this.add(nbResTurn);
         this.add(new JLabel("Time Turn (min) : "));
         this.add(timeTurn);
+        this.add(new JLabel("Distance : "));
+        this.add(distancemin);
 
         this.add(confirm);
         this.add(cancel);
@@ -74,8 +78,9 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
                 Integer nbir = Integer.parseInt(nbInitRes.getText().trim());
                 Integer nbRest = Integer.parseInt(nbResTurn.getText().trim());
                 Integer tt = Integer.parseInt(timeTurn.getText().trim());
+                Integer distance = Integer.parseInt(distancemin.getText().trim());
 
-                GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText().trim());
+                GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText().trim(), distance);
                 this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
             } catch (SQLException e1) {
                 e1.printStackTrace();

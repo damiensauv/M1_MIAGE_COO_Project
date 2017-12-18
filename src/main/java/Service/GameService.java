@@ -29,7 +29,7 @@ public class GameService {
 
     }
 
-    public void createGame(Coordonnees coordonnees, Integer maxUser, Integer nbInitRes, Integer nbResTurn, Integer timeTurn, String name) throws SQLException {
+    public void createGame(Coordonnees coordonnees, Integer maxUser, Integer nbInitRes, Integer nbResTurn, Integer timeTurn, String name, Integer distance) throws SQLException {
 
         IGame game = new Game();
 
@@ -41,6 +41,7 @@ public class GameService {
         game.setNbInitRes(nbInitRes);
         game.setTimeTurn(timeTurn);
         game.setNbResTurn(nbResTurn);
+        game.setDistanceMinVille(distance);
 
         Integer idx = GameMapper.getInstance().insert(game);
 
@@ -94,6 +95,16 @@ public class GameService {
         return 0;
     }
 
+    public void initGame(IGame game){
+
+        // placement ville
+
+
+
+        // update ressource joueur
+
+    }
+
     public Integer launchGame(IGame game) {
         IUser u = UserService.getInstance().getConnectedUser();
 
@@ -103,7 +114,7 @@ public class GameService {
         if (game.getUserInGame().size() <= 1)
             return 2;
 
-        // gene
+        this.initGame(game);
 
         return 0;
     }

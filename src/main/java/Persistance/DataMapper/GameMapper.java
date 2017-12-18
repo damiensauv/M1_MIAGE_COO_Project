@@ -82,14 +82,15 @@ public class GameMapper extends DataMapper<IGame> {
         game.setCurrentTurn(rs.getInt("current_turn"));
         game.setStatus(Status.valueOf(rs.getString("status")));
         game.setUserInGame(new VirtualProxyBuilder<List<IJoueur>>(List.class, new ListUserInGameFactory(rs.getInt("id"))).getProxy());
-
+        game.setDistanceMinVille(rs.getInt("distance_min_ville"));
+        
         return game;
     }
 
     public Integer insert(IGame o) throws SQLException { // passer avec un try catch ici
 
-        String query = "INSERT INTO game(name, owner, map_size_x, map_size_y, max_user, nb_init_res, nb_res_turn, time_turn, status)" +
-                " VALUES (?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO game(name, owner, map_size_x, map_size_y, max_user, nb_init_res, nb_res_turn, time_turn, status, distance_min_ville)" +
+                " VALUES (?,?,?,?,?,?,?,?,?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, o.getName());
@@ -101,6 +102,7 @@ public class GameMapper extends DataMapper<IGame> {
         preparedStatement.setInt(7, o.getNbResTurn());
         preparedStatement.setInt(8, o.getTimeTurn());
         preparedStatement.setString(9, o.getStatus().toString());
+        preparedStatement.setInt(10, o.getDistanceMinVille());
 
         preparedStatement.executeUpdate();
 

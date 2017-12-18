@@ -63,4 +63,8 @@ public interface IGame extends IDomainObject {
 
     public void setUserInGame(List<IJoueur> userInGame);
 
+    public Integer getDistanceMinVille();
+
+    public void setDistanceMinVille(Integer distanceMinVille);
+
 }
