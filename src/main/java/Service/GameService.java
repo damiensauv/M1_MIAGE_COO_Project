@@ -4,7 +4,10 @@ import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
 import Jeu.Entity.Status;
 import Jeu.Interface.IGame;
+import Jeu.Interface.IJoueur;
+import Jeu.Interface.IUser;
 import Persistance.DataMapper.GameMapper;
+import Persistance.DataMapper.JoueurMapper;
 import Util.UnitOfWork;
 
 import java.sql.SQLException;
@@ -43,6 +46,8 @@ public class GameService {
 
         game.setCarte(CarteService.getInstance().createCarte(coordonnees, idx));
 
+        System.out.println("Count " + game.getUserInGame().size());
+
         UnitOfWork.getInstance().commit();
     }
 
@@ -51,7 +56,6 @@ public class GameService {
     }
 
     public Game getGame(Integer id) {
-
         return null;
     }
 
@@ -63,4 +67,30 @@ public class GameService {
         return GameMapper.getInstance().findAllGamesByStatus();
     }
 
+
+    public boolean isUserInGame(int id_game, int id_user) {
+        return JoueurMapper.getInstance().isUserInGame(id_game, id_user);
+    }
+
+    public Integer addCurrentJoueur(IGame game) {
+        IUser u = UserService.getInstance().getConnectedUser();
+
+        // le joueur est deja dans la game
+        if (this.isUserInGame(game.getId(), u.getId())) {
+            return 1;
+        } else if (game.getUserInGame().size() == game.getMaxUser()) {
+            return 2;
+        } else {
+            try {
+                IJoueur j = JoueurService.getInstance().createJoueur(game, u);
+                game.addUserInGame(j);
+                UnitOfWork.getInstance().commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        return 0;
+    }
 }

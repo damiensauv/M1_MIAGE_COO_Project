@@ -2,6 +2,7 @@ package Service;
 
 import Jeu.Entity.Joueur;
 import Jeu.Interface.IGame;
+import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
 import Persistance.DataMapper.JoueurMapper;
 
@@ -22,13 +23,14 @@ public class JoueurService {
 
     }
 
-    public void createJoueur(IGame game, IUser user) throws SQLException {
+    public IJoueur createJoueur(IGame game, IUser user) throws SQLException {
 
-        Joueur joueur = new Joueur();
+        IJoueur joueur = new Joueur();
         joueur.setGame(game);
         joueur.setUser(user);
 
         JoueurMapper.getInstance().insert(joueur);
+        return joueur;
     }
 
 

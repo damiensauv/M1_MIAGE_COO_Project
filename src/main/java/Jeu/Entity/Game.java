@@ -159,4 +159,8 @@ public class Game extends AObject implements IGame {
         v.visiter(this);
     }
 
+    @Override
+    public String toString() {
+        return name + " | [" + this.userInGame.size() + "/" + maxUser +"]";
+    }
 }

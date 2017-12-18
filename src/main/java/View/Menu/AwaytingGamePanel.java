@@ -15,29 +15,34 @@ import java.util.List;
 public class AwaytingGamePanel extends MyPanel implements ActionListener {
 
     private JButton launch;
+    private JButton rejoin;
     private JButton cancel;
-    private JList<String> jListgame;
+    private JList<IGame> jListgame;
 
     public AwaytingGamePanel(MyFrame frame) {
         super(frame);
 
         launch = new JButton("launch");
         cancel = new JButton("cancel");
+        rejoin = new JButton("rejoindre");
 
         this.add(launch);
+        this.add(rejoin);
         this.add(cancel);
+        rejoin.addActionListener(this);
         launch.addActionListener(this);
         cancel.addActionListener(this);
 
         List<IGame> listGames = GameService.getInstance().getAwaytingGame();
-        DefaultListModel<String> listModel = new DefaultListModel<String>();
+        DefaultListModel<IGame> listModel = new DefaultListModel<IGame>();
 
         for (IGame game : listGames) {
-            listModel.addElement(game.getName());
+            listModel.addElement(game);
         }
 
-        jListgame = new JList<String>(listModel);
+        jListgame = new JList<IGame>(listModel);
         this.add(jListgame);
+        this.add(new JScrollPane(jListgame));
 
     }
 
@@ -45,11 +50,22 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
 
         if (e.getSource() == launch) {
 
+            // check si plus un joueur
+
             this.getMyFrame().switchPanel(new CartePanel(this.getMyFrame()));
 
 
         } else if (e.getSource() == cancel) {
             this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
+        } else if (e.getSource() == rejoin) {
+            IGame game = jListgame.getSelectedValue();
+
+            // add le joueur co dans la partie, check si limite non atteinte et si il est pas deja dans la game
+            Integer ret = GameService.getInstance().addCurrentJoueur(game);
+            if (ret > 0)
+                JOptionPane.showMessageDialog(this, "Action non possible");
+
+
         }
 
 

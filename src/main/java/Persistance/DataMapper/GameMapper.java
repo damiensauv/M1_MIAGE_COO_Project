@@ -112,7 +112,9 @@ public class GameMapper extends DataMapper<IGame> {
 
         Integer[] idxJoueur = (Integer[]) JoueurMapper.getInstance().insert(joueur);
 
-        o.addUserInGame(new VirtualProxyBuilder<IJoueur>(IJoueur.class, new JoueurFactory(idxJoueur)).getProxy());
+        IJoueur j = new VirtualProxyBuilder<IJoueur>(IJoueur.class, new JoueurFactory(idxJoueur)).getProxy();
+
+        o.addUserInGame(j);
 
         idMap.put(idx, o);
         o.add(UnitOfWork.getInstance());
@@ -124,20 +126,13 @@ public class GameMapper extends DataMapper<IGame> {
     }
 
     public void update(IGame o) throws SQLException {
-        String query = "UPDATE game SET winner=?, current_turn=?, status=?, carte=? WHERE id = ?";
+        String query = "UPDATE game SET current_turn=?, status=?, carte=? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
-
-        System.out.println("UPDATE GAME : " + o.getId());
-
-        if (o.getWinner() == null)
-            ps.setNull(1, Types.NULL);
-        else
-            ps.setInt(1, o.getWinner().getId());
-
-        ps.setInt(2, o.getCurrentTurn());
-        ps.setString(3, o.getStatus().toString());
+        
+        ps.setInt(1, o.getCurrentTurn());
+        ps.setString(2, o.getStatus().toString());
+        ps.setInt(3, o.getId());
         ps.setInt(4, o.getId());
-        ps.setInt(5, o.getId());
         ps.executeUpdate();
     }
 
@@ -171,4 +166,5 @@ public class GameMapper extends DataMapper<IGame> {
             return null;
         }
     }
+
 }

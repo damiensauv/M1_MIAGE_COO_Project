@@ -74,7 +74,6 @@ public class JoueurMapper extends DataMapper<IJoueur> {
     public Object insert(IJoueur o) throws SQLException {
 
         String query = "INSERT INTO joueur(id_user, id_game) VALUES (?,?)";
-
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, o.getUser().getId());
         preparedStatement.setInt(2, o.getGame().getId());
@@ -119,8 +118,7 @@ public class JoueurMapper extends DataMapper<IJoueur> {
             }
 
             List<IJoueur> lists = new ArrayList<IJoueur>();
-
-            while (rs.next()) {
+            do {
                 IJoueur g = createJoueur(rs);
                 IJoueur p = idMap.get(g.getId());
                 if (p == null) {
@@ -128,11 +126,34 @@ public class JoueurMapper extends DataMapper<IJoueur> {
                     g.add(UnitOfWork.getInstance());
                 }
                 lists.add(g);
-            }
+            } while (rs.next());
+
             return lists;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public boolean isUserInGame(int id_game, int id_user) {
+        String req = "SELECT * FROM joueur WHERE id_game=? AND id_user=?";
+
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(req);
+            ps.setInt(1, id_game);
+            ps.setInt(2, id_user);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                System.out.println("not in bd");
+                return false;
+            }
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 }
