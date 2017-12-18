@@ -1,6 +1,7 @@
 package Jeu.Entity;
 
 import Jeu.Interface.ICarte;
+import Jeu.Interface.IVille;
 import Util.Observer;
 import Util.Visitor;
 
@@ -11,16 +12,11 @@ import java.util.Random;
 public class Carte extends AObject implements ICarte {
 
     private Territoire[][] carte;
-    private List<Ville> listeVilles;
-    private List<Armee> listeArmee;
 
     public Carte(Coordonnees coo) {
         int randomInt;
         int sizeX = coo.getX();
         int sizeY = coo.getY();
-
-        this.listeArmee = new ArrayList<Armee>();
-        this.listeVilles = new ArrayList<Ville>();
 
         this.carte = new Territoire[sizeX][sizeY];
 
@@ -62,34 +58,6 @@ public class Carte extends AObject implements ICarte {
 
     public void setCarte(Territoire[][] carte) {
         this.carte = carte;
-        notifier();
-    }
-
-    public List<Ville> getListeVilles() {
-        return listeVilles;
-    }
-
-    public void addVille(Ville ville) {
-        this.listeVilles.add(ville);
-        notifier();
-    }
-
-    public void setListeVilles(List<Ville> listeVilles) {
-        this.listeVilles = listeVilles;
-        notifier();
-    }
-
-    public List<Armee> getListeArmee() {
-        return listeArmee;
-    }
-
-    public void addArmee(Armee armee) {
-        this.listeArmee.add(armee);
-        notifier();
-    }
-
-    public void setListeArmee(List<Armee> listeArmee) {
-        this.listeArmee = listeArmee;
         notifier();
     }
 

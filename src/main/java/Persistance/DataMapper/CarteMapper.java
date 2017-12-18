@@ -2,6 +2,7 @@ package Persistance.DataMapper;
 
 import Jeu.Entity.Territoire;
 import Jeu.Interface.ICarte;
+import Service.TerritoireService;
 import Util.UnitOfWork;
 
 import java.sql.PreparedStatement;
@@ -62,21 +63,24 @@ public class CarteMapper extends DataMapper<ICarte> {
     }
 
     public Integer insert(ICarte o, Integer idx_game) throws SQLException { // passer avec un try catch ici
-        String query = "INSERT INTO carte(id, x, y, type)" +
-                " VALUES (?,?,?,?)";
+
+        // add idmap
+
+        String query = "INSERT INTO carte(id) VALUES (?)";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, idx_game);
+        preparedStatement.executeUpdate();
+
 
         Territoire[][] carte = o.getCarte();
         for (int i = 0; i < carte.length; i++) {
             for (int j = 0; j < carte[i].length; j++) {
-
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setInt(1, idx_game);
-                preparedStatement.setInt(2, i);
-                preparedStatement.setInt(3, j);
-                preparedStatement.setString(4, carte[i][j].getType().toString());
-                preparedStatement.executeUpdate();
+                carte[i][j].setId(idx_game);
+                TerritoireService.getInstance().insertBasicTerritoire(carte[i][j]);
             }
         }
+
 
         return 0;
     }

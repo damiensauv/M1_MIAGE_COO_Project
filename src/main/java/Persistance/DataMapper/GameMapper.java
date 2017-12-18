@@ -83,7 +83,7 @@ public class GameMapper extends DataMapper<IGame> {
         game.setStatus(Status.valueOf(rs.getString("status")));
         game.setUserInGame(new VirtualProxyBuilder<List<IJoueur>>(List.class, new ListUserInGameFactory(rs.getInt("id"))).getProxy());
         game.setDistanceMinVille(rs.getInt("distance_min_ville"));
-        
+
         return game;
     }
 
@@ -151,7 +151,7 @@ public class GameMapper extends DataMapper<IGame> {
                 return null;
             }
 
-            while (rs.next()) {
+             do {
                 IGame g = createGame(rs);
                 IGame p = idMap.get(g.getId());
                 if (p == null) {
@@ -159,8 +159,7 @@ public class GameMapper extends DataMapper<IGame> {
                     g.add(UnitOfWork.getInstance());
                 }
                 listGames.add(g);
-            }
-
+            }while (rs.next());
             return listGames;
 
         } catch (SQLException e) {

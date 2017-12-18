@@ -47,7 +47,6 @@ public class GameService {
 
         game.setCarte(CarteService.getInstance().createCarte(coordonnees, idx));
 
-        System.out.println("Count " + game.getUserInGame().size());
 
         UnitOfWork.getInstance().commit();
     }
@@ -95,20 +94,20 @@ public class GameService {
         return 0;
     }
 
-    public void initGame(IGame game){
+    public void initGame(IGame game) {
 
         // placement ville
-
+        CarteService.getInstance().initVille(game.getCarte(), game);
 
 
         // update ressource joueur
-
+        UnitOfWork.getInstance().commit();
     }
 
     public Integer launchGame(IGame game) {
         IUser u = UserService.getInstance().getConnectedUser();
 
-        if (game.getOwner() != u)
+        if (!game.getOwner().equals(u))
             return 1;
 
         if (game.getUserInGame().size() <= 1)

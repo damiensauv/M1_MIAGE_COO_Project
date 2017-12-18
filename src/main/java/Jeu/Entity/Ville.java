@@ -1,47 +1,24 @@
 package Jeu.Entity;
 
-import Jeu.Interface.ICarte;
-import Jeu.Interface.IJoueur;
+import Jeu.Interface.IUser;
 import Jeu.Interface.IVille;
 import Util.Observer;
 import Util.Visitor;
 
 public class Ville extends AObject implements IVille {
 
-    private ICarte carte;
-    private IJoueur joueur;
-    private Coordonnees coordonnees;
+    private IUser user;
 
-    public Ville(ICarte carte, IJoueur joueur, Coordonnees coordonnees) {
-        this.carte = carte;
-        this.joueur = joueur;
-        this.coordonnees = coordonnees;
+    public Ville(IUser joueur) {
+        this.user = joueur;
     }
 
-    public IJoueur getJoueur() {
-        return joueur;
+    public IUser getJoueur() {
+        return user;
     }
 
-    public void setJoueur(IJoueur joueur) {
-        this.joueur = joueur;
-        notifier();
-    }
-
-    public ICarte getCarte() {
-        return carte;
-    }
-
-    public void setCarte(ICarte carte) {
-        this.carte = carte;
-        notifier();
-    }
-
-    public Coordonnees getCoordonnees() {
-        return coordonnees;
-    }
-
-    public void setCoordonnees(Coordonnees coordonnees) {
-        this.coordonnees = coordonnees;
+    public void setJoueur(IUser user) {
+        this.user = user;
         notifier();
     }
 
@@ -58,3 +35,5 @@ public class Ville extends AObject implements IVille {
         v.visiter(this);
     }
 }
+
+

@@ -35,19 +35,24 @@ CREATE TABLE joueur (
 
 CREATE TABLE carte (
   id int(11) NOT NULL,
-  x int(11) NOT NULL,
-  y int(11) NOT NULL,
-  type ENUM('plaine', 'champs', 'montagne'),
   FOREIGN KEY (id) REFERENCES game(id)
 );
 
 CREATE TABLE ville(
   id int(11) NOT NULL AUTO_INCREMENT,
-  id_carte int(11) NOT NULL,
   id_joueur int(11) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id_joueur) REFERENCES user(id)
+);
+
+CREATE TABLE territoire(
+  id int(11) NOT NULL,
   x int(11) NOT NULL,
   y int(11) NOT NULL,
-  PRIMARY KEY (id)
+  id_ville int(11) NULL,
+  owner int(11) NULL,
+  type ENUM('plaine', 'champs', 'montagne'),
+  FOREIGN KEY (id_ville) REFERENCES ville(id)
 );
 
 CREATE TABLE armee(

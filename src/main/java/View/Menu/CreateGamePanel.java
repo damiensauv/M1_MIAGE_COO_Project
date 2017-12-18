@@ -85,6 +85,7 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (Exception e2) {
+                e2.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Merci de remplit tout les champs correctement");
             }
         } else if (source == cancel) {
