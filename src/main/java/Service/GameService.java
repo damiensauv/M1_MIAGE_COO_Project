@@ -93,4 +93,18 @@ public class GameService {
 
         return 0;
     }
+
+    public Integer launchGame(IGame game) {
+        IUser u = UserService.getInstance().getConnectedUser();
+
+        if (game.getOwner() != u)
+            return 1;
+
+        if (game.getUserInGame().size() <= 1)
+            return 2;
+
+        // gene
+
+        return 0;
+    }
 }

@@ -49,23 +49,26 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == launch) {
+            IGame game = jListgame.getSelectedValue();
 
-            // check si plus un joueur
+            Integer ret = GameService.getInstance().launchGame(game);
+            if (ret == 1)
+                JOptionPane.showMessageDialog(this, "Tu n'est pas le proprio");
+            else if (ret == 2)
+                JOptionPane.showMessageDialog(this, "Tu est seul");
 
-            this.getMyFrame().switchPanel(new CartePanel(this.getMyFrame()));
+//            this.getMyFrame().switchPanel(new CartePanel(this.getMyFrame()));
 
 
         } else if (e.getSource() == cancel) {
             this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
         } else if (e.getSource() == rejoin) {
             IGame game = jListgame.getSelectedValue();
-
-            // add le joueur co dans la partie, check si limite non atteinte et si il est pas deja dans la game
             Integer ret = GameService.getInstance().addCurrentJoueur(game);
             if (ret > 0)
                 JOptionPane.showMessageDialog(this, "Action non possible");
-
-
+            else if (ret == 0)
+                JOptionPane.showMessageDialog(this, "Bien ajouter a la partie");
         }
 
 

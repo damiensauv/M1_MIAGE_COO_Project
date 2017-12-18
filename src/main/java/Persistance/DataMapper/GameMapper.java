@@ -128,7 +128,7 @@ public class GameMapper extends DataMapper<IGame> {
     public void update(IGame o) throws SQLException {
         String query = "UPDATE game SET current_turn=?, status=?, carte=? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
-        
+
         ps.setInt(1, o.getCurrentTurn());
         ps.setString(2, o.getStatus().toString());
         ps.setInt(3, o.getId());
