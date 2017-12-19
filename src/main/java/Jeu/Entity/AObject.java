@@ -17,7 +17,6 @@ public abstract class AObject implements IDomainObject {
 
     public void setId(Integer id) {
         this.id = id;
-        notifier();
     }
 
     public Integer getId() {

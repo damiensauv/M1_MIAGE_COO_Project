@@ -2,12 +2,16 @@ package Jeu.Entity;
 
 import Jeu.Interface.IUser;
 import Util.Observer;
+import Util.UnitOfWork;
 import Util.Visitor;
 
 public class User extends AObject implements IUser {
 
     private String username;
     private String password;
+
+    public User(){
+    }
 
     public String getUsername() {
         return this.username;

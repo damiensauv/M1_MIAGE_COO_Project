@@ -82,9 +82,7 @@ public class JoueurMapper extends DataMapper<IJoueur> {
         Integer[] idx = new Integer[2];
         idx[0] = o.getUser().getId();
         idx[1] = o.getGame().getId();
-
         idMap.put(idx, o);
-        o.add(UnitOfWork.getInstance());
         return idx;
     }
 
@@ -113,8 +111,8 @@ public class JoueurMapper extends DataMapper<IJoueur> {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) {
-                System.out.println("not in bd " + id);
-                return null;
+                System.out.println("Joueur not in bd " + id);
+                return new ArrayList<IJoueur>();
             }
 
             List<IJoueur> lists = new ArrayList<IJoueur>();

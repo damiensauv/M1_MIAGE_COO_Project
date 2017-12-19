@@ -5,6 +5,12 @@ password varchar(50) DEFAULT NULL,
 PRIMARY KEY(id)
 );
 
+CREATE TABLE carte (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  seed VARCHAR(50) NULL,
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE game (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(50) DEFAULT NULL,
@@ -22,7 +28,8 @@ CREATE TABLE game (
   status ENUM('awayting','InProgress','finish'),
   PRIMARY KEY (id),
   FOREIGN KEY (owner) REFERENCES user(id),
-  FOREIGN KEY (winner) REFERENCES user(id)
+  FOREIGN KEY (winner) REFERENCES user(id),
+  FOREIGN KEY (carte) REFERENCES carte(id)
 );
 
 CREATE TABLE joueur (
@@ -33,16 +40,13 @@ CREATE TABLE joueur (
   FOREIGN KEY (id_game) REFERENCES game(id)
 );
 
-CREATE TABLE carte (
-  id int(11) NOT NULL,
-  FOREIGN KEY (id) REFERENCES game(id)
-);
-
 CREATE TABLE ville(
   id int(11) NOT NULL AUTO_INCREMENT,
   id_joueur int(11) NOT NULL,
+  id_carte int NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (id_joueur) REFERENCES user(id)
+  FOREIGN KEY (id_joueur) REFERENCES user(id),
+  FOREIGN KEY (id_carte) REFERENCES carte(id)
 );
 
 CREATE TABLE territoire(
@@ -52,7 +56,10 @@ CREATE TABLE territoire(
   id_ville int(11) NULL,
   owner int(11) NULL,
   type ENUM('plaine', 'champs', 'montagne'),
-  FOREIGN KEY (id_ville) REFERENCES ville(id)
+  PRIMARY KEY (id, x, y),
+  FOREIGN KEY (id) REFERENCES carte(id),
+  FOREIGN KEY (id_ville) REFERENCES ville(id),
+  FOREIGN KEY (owner) REFERENCES user(id)
 );
 
 CREATE TABLE armee(

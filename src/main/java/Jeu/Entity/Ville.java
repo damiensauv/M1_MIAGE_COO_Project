@@ -3,6 +3,7 @@ package Jeu.Entity;
 import Jeu.Interface.IUser;
 import Jeu.Interface.IVille;
 import Util.Observer;
+import Util.UnitOfWork;
 import Util.Visitor;
 
 public class Ville extends AObject implements IVille {
@@ -11,6 +12,7 @@ public class Ville extends AObject implements IVille {
 
     public Ville(IUser joueur) {
         this.user = joueur;
+        this.add(UnitOfWork.getInstance());
     }
 
     public IUser getJoueur() {

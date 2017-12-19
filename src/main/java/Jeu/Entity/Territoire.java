@@ -13,7 +13,7 @@ public abstract class Territoire extends AObject implements ITerritoire {
 
     private Coordonnees coordonnees;
 
-    private IVille villes;
+    private IVille villes = null;
 
     private IUser owner;
 
@@ -42,6 +42,22 @@ public abstract class Territoire extends AObject implements ITerritoire {
     public void setType(Type type) {
         this.type = type;
         notifier();
+    }
+
+    public IVille getVilles() {
+        return villes;
+    }
+
+    public void setVilles(IVille villes) {
+        this.villes = villes;
+    }
+
+    public IUser getOwner() {
+        return owner;
+    }
+
+    public void setOwner(IUser owner) {
+        this.owner = owner;
     }
 
     public void add(Observer o) {

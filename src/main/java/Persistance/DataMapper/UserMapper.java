@@ -94,8 +94,8 @@ public class UserMapper extends DataMapper<IUser> {
 
     }
 
-    void update(IUser o) {
-
+    public void update(IUser o) {
+        System.out.println("Update USER");
     }
 
 }

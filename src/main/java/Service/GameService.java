@@ -31,24 +31,23 @@ public class GameService {
 
     public void createGame(Coordonnees coordonnees, Integer maxUser, Integer nbInitRes, Integer nbResTurn, Integer timeTurn, String name, Integer distance) throws SQLException {
 
-        IGame game = new Game();
-
-        game.setName(name);
-        game.setStatus(Status.awayting);
-        game.setOwner(UserService.getInstance().getConnectedUser());
-        game.setMapSize(coordonnees);
-        game.setMaxUser(maxUser);
-        game.setNbInitRes(nbInitRes);
-        game.setTimeTurn(timeTurn);
-        game.setNbResTurn(nbResTurn);
-        game.setDistanceMinVille(distance);
+        IGame game = new Game(name,
+                Status.awayting,
+                UserService.getInstance().getConnectedUser(),
+                coordonnees,
+                maxUser,
+                nbInitRes,
+                nbResTurn,
+                timeTurn,
+                distance,
+                CarteService.getInstance().createCarte(coordonnees)
+        );
 
         Integer idx = GameMapper.getInstance().insert(game);
-
-        game.setCarte(CarteService.getInstance().createCarte(coordonnees, idx));
-
-
         UnitOfWork.getInstance().commit();
+
+        IGame g = GameMapper.getInstance().find(idx);
+        this.addCurrentJoueur(g);
     }
 
     public void updateGame(Game game) {
@@ -89,15 +88,13 @@ public class GameService {
                 e.printStackTrace();
             }
         }
-
-
         return 0;
     }
 
     public void initGame(IGame game) {
 
         // placement ville
-        CarteService.getInstance().initVille(game.getCarte(), game);
+        CarteService.getInstance().initVille(game);
 
 
         // update ressource joueur

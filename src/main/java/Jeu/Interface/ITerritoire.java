@@ -9,12 +9,20 @@ public interface ITerritoire {
 
     public Integer getId();
 
-    Type getType();
+    public Type getType();
 
     public void setType(Type type);
 
-    Coordonnees getCoordonnees();
+    public Coordonnees getCoordonnees();
 
     public void setCoordonnees(Coordonnees coordonnees);
+
+    public IVille getVilles();
+
+    public void setVilles(IVille villes);
+
+    public IUser getOwner();
+
+    public void setOwner(IUser owner);
 
 }

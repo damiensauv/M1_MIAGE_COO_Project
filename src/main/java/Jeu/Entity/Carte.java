@@ -3,6 +3,7 @@ package Jeu.Entity;
 import Jeu.Interface.ICarte;
 import Jeu.Interface.IVille;
 import Util.Observer;
+import Util.UnitOfWork;
 import Util.Visitor;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Carte extends AObject implements ICarte {
                 this.setTerritoire(new Coordonnees(i, j), randomInt);
             }
         }
+        this.add(UnitOfWork.getInstance());
     }
 
     public void setTerritoire(Coordonnees coord, int type) {

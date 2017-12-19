@@ -28,12 +28,12 @@ public class CarteService {
 
     }
 
-    public Carte createCarte(Coordonnees coordonnees, Integer idx) {
+    public Carte createCarte(Coordonnees coordonnees) {
 
         Carte carte = new Carte(coordonnees);
 
         try {
-            CarteMapper.getInstance().insert(carte, idx);
+            CarteMapper.getInstance().insert(carte);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -41,13 +41,14 @@ public class CarteService {
         return carte;
     }
 
-    public void initVille(ICarte carte, IGame game) {
+    public void initVille(IGame game) {
         int randomX;
         int randomY;
         boolean flag;
 
         Random randomGenerator = new Random();
 
+        ICarte carte = game.getCarte();
         for (IJoueur j : game.getUserInGame()) {
             // TODO : prendre en compte la distance Min
             flag = true;
@@ -56,10 +57,12 @@ public class CarteService {
                 randomX = randomGenerator.nextInt(game.getMapSize().getX());
                 randomY = randomGenerator.nextInt(game.getMapSize().getY());
 
-
+                if (carte.getCarte()[randomX][randomY].getVilles() == null) {
+                    carte.getCarte()[randomX][randomY].setVilles(ville);
+                    flag = false;
+                }
             }
         }
-
 
         UnitOfWork.getInstance().commit();
     }

@@ -5,6 +5,7 @@ import Jeu.Interface.IGame;
 import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
 import Util.Observer;
+import Util.UnitOfWork;
 import Util.Visitor;
 
 import java.util.ArrayList;
@@ -30,8 +31,40 @@ public class Game extends AObject implements IGame {
     private Integer currentTurn = 0;
     private List<IJoueur> userInGame; // Table asso Id-Game, Id-User, Point Ressources
 
-    public Game() {
-        userInGame = new ArrayList<IJoueur>();
+    public Game(String name, Status status, IUser owner, Coordonnees mapSize, Integer maxUser, Integer nbInitRes, Integer nbResTurn, Integer timeTurn, Integer distanceMinVille, ICarte carte) {
+        this.name = name;
+        this.status = status;
+        this.owner = owner;
+        this.mapSize = mapSize;
+        this.maxUser = maxUser;
+        this.NbInitRes = nbInitRes;
+        this.NbResTurn = nbResTurn;
+        this.timeTurn = timeTurn;
+        this.distanceMinVille = distanceMinVille;
+        this.carte = carte;
+        this.userInGame = new ArrayList<IJoueur>();
+        this.add(UnitOfWork.getInstance());
+    }
+
+    public Game(Integer id, String name, Status status, IUser owner, IUser winner, Coordonnees mapSize, Integer maxUser, Integer nbInitRes, Integer nbResTurn, Integer timeTurn, Integer distanceMinVille, ICarte carte, Integer currentTurn, List<IJoueur> userInGame) {
+        this.setId(id);
+        this.name = name;
+        this.status = status;
+        this.owner = owner;
+        this.winner = winner;
+        this.mapSize = mapSize;
+        this.maxUser = maxUser;
+        this.NbInitRes = nbInitRes;
+        this.NbResTurn = nbResTurn;
+        this.timeTurn = timeTurn;
+        this.distanceMinVille = distanceMinVille;
+        this.carte = carte;
+        this.currentTurn = currentTurn;
+        if (userInGame == null)
+            this.userInGame = new ArrayList<IJoueur>();
+        else
+            this.userInGame = userInGame;
+        this.add(UnitOfWork.getInstance());
     }
 
     public Status getStatus() {
@@ -130,12 +163,10 @@ public class Game extends AObject implements IGame {
 
     public void addUserInGame(IJoueur joueur) {
         this.userInGame.add(joueur);
-        notifier();
     }
 
     public void setUserInGame(List<IJoueur> userInGame) {
         this.userInGame = userInGame;
-        notifier();
     }
 
     public String getName() {
@@ -162,7 +193,7 @@ public class Game extends AObject implements IGame {
 
     @Override
     public String toString() {
-        return name + " | [" + this.userInGame.size() + "/" + maxUser +"]";
+        return name + " | [" + this.userInGame.size() + "/" + maxUser + "]";
     }
 
     public Integer getDistanceMinVille() {

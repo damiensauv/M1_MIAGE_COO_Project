@@ -4,6 +4,7 @@ import Jeu.Interface.IGame;
 import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
 import Util.Observer;
+import Util.UnitOfWork;
 import Util.Visitor;
 
 public class Joueur extends AObject implements IJoueur {
@@ -12,13 +13,14 @@ public class Joueur extends AObject implements IJoueur {
     private IGame game;
 
     // ajouter les infos in Game du player
+    public Joueur(){
 
-    public Joueur() {
     }
 
     public Joueur(IUser user, IGame game) {
         this.user = user;
         this.game = game;
+        this.add(UnitOfWork.getInstance());
     }
 
     public IUser getUser() {
