@@ -1,5 +1,6 @@
 package Persistance.DataMapper;
 
+import Jeu.Entity.Carte;
 import Jeu.Entity.Territoire;
 import Jeu.Interface.ICarte;
 import Service.TerritoireService;
@@ -24,6 +25,8 @@ public class CarteMapper extends DataMapper<ICarte> {
     }
 
     public ICarte find(Object idx) {
+
+        System.out.println("CArte Find");
 
         Integer id = (Integer) idx;
 
@@ -72,6 +75,11 @@ public class CarteMapper extends DataMapper<ICarte> {
     }
 
     private ICarte createCarte(ResultSet rs) {
+
+        //TODO :: recreate OBJ CARTE avec Territoire
+        // TODO : ajouter dans carte les Coord pour le max y et x
+//        ICarte carte = new Carte();
+
         return null;
     }
 

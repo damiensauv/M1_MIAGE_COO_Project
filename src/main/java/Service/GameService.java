@@ -98,7 +98,7 @@ public class GameService {
 
 
         // update ressource joueur
-        UnitOfWork.getInstance().commit();
+        // UnitOfWork.getInstance().commit();
     }
 
     public Integer launchGame(IGame game) {

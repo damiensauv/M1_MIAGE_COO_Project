@@ -57,10 +57,14 @@ public class CarteService {
                 randomX = randomGenerator.nextInt(game.getMapSize().getX());
                 randomY = randomGenerator.nextInt(game.getMapSize().getY());
 
+                System.out.println("Type : " + carte.getCarte()[randomX][randomY].getType());
+
+                /*
                 if (carte.getCarte()[randomX][randomY].getVilles() == null) {
                     carte.getCarte()[randomX][randomY].setVilles(ville);
                     flag = false;
                 }
+                */
             }
         }
 
