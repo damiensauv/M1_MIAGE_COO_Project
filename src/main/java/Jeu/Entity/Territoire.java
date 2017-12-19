@@ -13,9 +13,9 @@ public abstract class Territoire extends AObject implements ITerritoire {
 
     private Coordonnees coordonnees;
 
-    private IVille villes = null;
+    protected IVille villes = null;
 
-    private IUser owner;
+    protected IUser owner;
 
     // add arme and owner de la case
 
@@ -32,7 +32,6 @@ public abstract class Territoire extends AObject implements ITerritoire {
 
     public void setCoordonnees(Coordonnees coordonnees) {
         this.coordonnees = coordonnees;
-        notifier();
     }
 
     public abstract void AfficherTypeTerritoire();
@@ -41,7 +40,6 @@ public abstract class Territoire extends AObject implements ITerritoire {
 
     public void setType(Type type) {
         this.type = type;
-        notifier();
     }
 
     public IVille getVilles() {
@@ -50,6 +48,7 @@ public abstract class Territoire extends AObject implements ITerritoire {
 
     public void setVilles(IVille villes) {
         this.villes = villes;
+        notifier();
     }
 
     public IUser getOwner() {
@@ -58,6 +57,7 @@ public abstract class Territoire extends AObject implements ITerritoire {
 
     public void setOwner(IUser owner) {
         this.owner = owner;
+        notifier();
     }
 
     public void add(Observer o) {

@@ -3,12 +3,15 @@ package Persistance.DataMapper;
 import Jeu.Entity.Carte;
 import Jeu.Entity.Territoire;
 import Jeu.Interface.ICarte;
+import Persistance.Factory.TerritoireFactory;
 import Service.TerritoireService;
+import Util.VirtualProxyGenerique;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class CarteMapper extends DataMapper<ICarte> {
 
@@ -64,23 +67,27 @@ public class CarteMapper extends DataMapper<ICarte> {
         Integer idx = getLastIndexInsert(preparedStatement);
         o.setId(idx);
 
-        Territoire[][] carte = o.getCarte();
-        for (int i = 0; i < carte.length; i++) {
-            for (int j = 0; j < carte[i].length; j++) {
-                carte[i][j].setId(idx);
-                TerritoireService.getInstance().insertBasicTerritoire(carte[i][j]);
+        List<List<Territoire>> carte = o.getTerritoires();
+
+        for (List<Territoire> at : carte) {
+            for (Territoire t : at) {
+                t.setId(idx);
+                TerritoireService.getInstance().insertBasicTerritoire(t);
             }
         }
+
         return 0;
     }
 
-    private ICarte createCarte(ResultSet rs) {
+    private ICarte createCarte(ResultSet rs) throws SQLException {
 
-        //TODO :: recreate OBJ CARTE avec Territoire
-        // TODO : ajouter dans carte les Coord pour le max y et x
-//        ICarte carte = new Carte();
+        ICarte carte = new Carte(
+                rs.getInt("id"),
+                rs.getString("seed"),
+                new VirtualProxyGenerique.VirtualProxyBuilder<List<List<Territoire>>>(List.class, new TerritoireFactory(rs.getInt("id"))).getProxy()
+        );
 
-        return null;
+        return carte;
     }
 
     public void delete(ICarte o) {

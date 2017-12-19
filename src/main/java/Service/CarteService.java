@@ -2,6 +2,7 @@ package Service;
 
 import Jeu.Entity.Carte;
 import Jeu.Entity.Coordonnees;
+import Jeu.Entity.Territoire;
 import Jeu.Entity.Ville;
 import Jeu.Interface.ICarte;
 import Jeu.Interface.IGame;
@@ -11,6 +12,7 @@ import Persistance.DataMapper.CarteMapper;
 import Util.UnitOfWork;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Random;
 
 public class CarteService {
@@ -53,11 +55,10 @@ public class CarteService {
             // TODO : prendre en compte la distance Min
             flag = true;
             IVille ville = new Ville(j.getUser());
-            while (flag) {
-                randomX = randomGenerator.nextInt(game.getMapSize().getX());
-                randomY = randomGenerator.nextInt(game.getMapSize().getY());
 
-                System.out.println("Type : " + carte.getCarte()[randomX][randomY].getType());
+            randomX = randomGenerator.nextInt(game.getMapSize().getX());
+            randomY = randomGenerator.nextInt(game.getMapSize().getY());
+
 
                 /*
                 if (carte.getCarte()[randomX][randomY].getVilles() == null) {
@@ -65,7 +66,7 @@ public class CarteService {
                     flag = false;
                 }
                 */
-            }
+
         }
 
         UnitOfWork.getInstance().commit();

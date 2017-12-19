@@ -1,7 +1,6 @@
 package Jeu.Entity;
 
 import Jeu.Interface.ICarte;
-import Jeu.Interface.IVille;
 import Util.Observer;
 import Util.UnitOfWork;
 import Util.Visitor;
@@ -12,20 +11,23 @@ import java.util.Random;
 
 public class Carte extends AObject implements ICarte {
 
-    private Territoire[][] carte;
+    private List<List<Territoire>> territoires;
+
+    private String seed;
 
     public Carte(Coordonnees coo) {
         int randomInt;
         int sizeX = coo.getX();
         int sizeY = coo.getY();
 
-        this.carte = new Territoire[sizeX][sizeY];
+        this.territoires = new ArrayList<List<Territoire>>();
 
         // Il nous faut un nombre aléatoire pour générer les cases de la map
         Random randomGenerator = new Random();
 
         // On crée la carte ligne par ligne
         for (int i = 0; i < sizeX; i++) {
+            this.territoires.add(new ArrayList<Territoire>());
             for (int j = 0; j < sizeY; j++) {
                 randomInt = randomGenerator.nextInt(3);
                 this.setTerritoire(new Coordonnees(i, j), randomInt);
@@ -34,42 +36,47 @@ public class Carte extends AObject implements ICarte {
         this.add(UnitOfWork.getInstance());
     }
 
+    public Carte(int id, String seed, List<List<Territoire>> territoires) {
+        this.setId(id);
+        this.seed = seed;
+        this.territoires = territoires;
+    }
+
     public void setTerritoire(Coordonnees coord, int type) {
         int xpos = coord.getX();
         int ypos = coord.getY();
 
         switch (type) {
             case 0:
-                this.carte[xpos][ypos] = new Plaine(coord);
+                this.territoires.get(xpos).add(new Plaine(coord, null, null));
                 break;
             case 1:
-                this.carte[xpos][ypos] = new Champ(coord);
+                this.territoires.get(xpos).add(new Champ(coord, null, null));
                 break;
             case 2:
-                this.carte[xpos][ypos] = new Montagne(coord);
+                this.territoires.get(xpos).add(new Montagne(coord, null, null));
                 break;
             default:
                 break;
         }
-        notifier();
     }
 
-    public Territoire[][] getCarte() {
-        return carte;
+    public List<List<Territoire>> getTerritoires() {
+        return territoires;
     }
 
-    public void setCarte(Territoire[][] carte) {
-        this.carte = carte;
+    public void setTerritoires(List<List<Territoire>> carte) {
+        this.territoires = carte;
         notifier();
     }
 
     public void AfficherCarteDebug() {
-        for (int i = 0; i < this.carte.length; i++) {
-            for (int j = 0; j < this.carte[i].length; j++) {
-                this.carte[i][j].AfficherTypeTerritoire();
+        /*for (int i = 0; i < this.territoires.length; i++) {
+            for (int j = 0; j < this.territoires[i].length; j++) {
+                this.territoires[i][j].AfficherTypeTerritoire();
             }
             System.out.println("");
-        }
+        }*/
     }
 
     public void add(Observer o) {
@@ -83,5 +90,14 @@ public class Carte extends AObject implements ICarte {
 
     public void accept(Visitor v) {
         v.visiter(this);
+    }
+
+    public String getSeed() {
+        return seed;
+    }
+
+    public void setSeed(String seed) {
+        this.seed = seed;
+        notifier();
     }
 }
