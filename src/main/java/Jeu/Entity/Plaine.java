@@ -5,8 +5,15 @@ import Jeu.Interface.IVille;
 
 public class Plaine extends Territoire {
 
-    public Plaine(Coordonnees coordonnees, IVille ville, IUser user) {
+    public Plaine(Coordonnees coordonnees, IVille ville, IUser user, int idx) {
         super(coordonnees);
+        this.villes = ville;
+        this.owner = user;
+        this.setId(idx);
+    }
+
+    public Plaine(Coordonnees coord, IVille ville, IUser user) {
+        super(coord);
         this.villes = ville;
         this.owner = user;
     }

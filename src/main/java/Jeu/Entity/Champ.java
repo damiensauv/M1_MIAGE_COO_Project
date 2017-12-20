@@ -5,8 +5,15 @@ import Jeu.Interface.IVille;
 
 public class Champ extends Territoire {
 
-    public Champ(Coordonnees coordonnees, IVille ville, IUser user) {
+    public Champ(Coordonnees coordonnees, IVille ville, IUser user, int idx) {
         super(coordonnees);
+        this.villes = ville;
+        this.owner = user;
+        this.setId(idx);
+    }
+
+    public Champ(Coordonnees coord, IVille ville, IUser user) {
+        super(coord);
         this.villes = ville;
         this.owner = user;
     }

@@ -96,7 +96,7 @@ public class GameService {
         // placement ville
         CarteService.getInstance().initVille(game);
 
-
+        // set Owner case
         // update ressource joueur
         // UnitOfWork.getInstance().commit();
     }

@@ -49,21 +49,26 @@ public class CarteService {
         boolean flag;
 
         Random randomGenerator = new Random();
-        
+
         ICarte carte = game.getCarte();
 
         for (IJoueur j : game.getUserInGame()) {
             // TODO : prendre en compte la distance Min
             flag = true;
-            IVille ville = new Ville(j.getUser());
+
+            IVille ville = new Ville(j.getUser(), carte);
+            ville = VilleService.getInstance().createVille(ville);
+
 
             while (flag) {
                 randomX = randomGenerator.nextInt(game.getMapSize().getX());
                 randomY = randomGenerator.nextInt(game.getMapSize().getY());
 
                 Territoire t = searchTerritoireByCoo(carte.getTerritoires(), randomX, randomY);
-                if (t.getVilles() == null) {
+
+                if (null == t.getVilles()) {
                     t.setVilles(ville);
+                    //t.setOwner(j.getUser()); // TODO faire un service qui gere les Owner de territoire
                     flag = false;
                 }
             }

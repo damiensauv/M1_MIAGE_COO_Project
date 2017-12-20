@@ -1,5 +1,6 @@
 package Jeu.Entity;
 
+import Jeu.Interface.ICarte;
 import Jeu.Interface.IUser;
 import Jeu.Interface.IVille;
 import Util.Observer;
@@ -9,9 +10,11 @@ import Util.Visitor;
 public class Ville extends AObject implements IVille {
 
     private IUser user;
+    private ICarte carte;
 
-    public Ville(IUser joueur) {
+    public Ville(IUser joueur, ICarte carte) {
         this.user = joueur;
+        this.carte = carte;
         this.add(UnitOfWork.getInstance());
     }
 
@@ -21,7 +24,6 @@ public class Ville extends AObject implements IVille {
 
     public void setJoueur(IUser user) {
         this.user = user;
-        notifier();
     }
 
     public void add(Observer o) {
@@ -35,6 +37,14 @@ public class Ville extends AObject implements IVille {
 
     public void accept(Visitor v) {
         v.visiter(this);
+    }
+
+    public ICarte getCarte() {
+        return carte;
+    }
+
+    public void setCarte(ICarte carte) {
+        this.carte = carte;
     }
 }
 
