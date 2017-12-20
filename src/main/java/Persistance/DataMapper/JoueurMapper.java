@@ -31,12 +31,12 @@ public class JoueurMapper extends DataMapper<IJoueur> {
     }
 
     private IJoueur createJoueur(ResultSet rs) throws SQLException {
-        IJoueur joueur = new Joueur();
 
-        joueur.setGame(new VirtualProxyGenerique.VirtualProxyBuilder<IGame>(IGame.class, new GameFactory(rs.getInt("id_game"))).getProxy());
-        joueur.setUser(new VirtualProxyGenerique.VirtualProxyBuilder<IUser>(IUser.class, new UserFactory(rs.getInt("id_user"))).getProxy());
-
-        return joueur;
+        return new Joueur(
+        new VirtualProxyGenerique.VirtualProxyBuilder<IGame>(IGame.class, new GameFactory(rs.getInt("id_game"))).getProxy(),
+        new VirtualProxyGenerique.VirtualProxyBuilder<IUser>(IUser.class, new UserFactory(rs.getInt("id_user"))).getProxy(),
+        rs.getInt("ressource")
+        );
     }
 
 
@@ -63,7 +63,7 @@ public class JoueurMapper extends DataMapper<IJoueur> {
 
             p = createJoueur(rs);
             idMap.put(id, p);
-            p.add(UnitOfWork.getInstance());
+
             return p;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,10 +73,11 @@ public class JoueurMapper extends DataMapper<IJoueur> {
 
     public Object insert(IJoueur o) throws SQLException {
 
-        String query = "INSERT INTO joueur(id_user, id_game) VALUES (?,?)";
+        String query = "INSERT INTO joueur(id_user, id_game, ressource) VALUES (?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, o.getUser().getId());
         preparedStatement.setInt(2, o.getGame().getId());
+        preparedStatement.setInt(3, o.getRessource());
         preparedStatement.executeUpdate();
 
         Integer[] idx = new Integer[2];
@@ -94,13 +95,13 @@ public class JoueurMapper extends DataMapper<IJoueur> {
 
         System.out.println("Update Joueur");
 
-        /*
-        String query = "UPDATE joueur SET champ=? WHERE id_user=? AND id_game=?";
+        String query = "UPDATE joueur SET ressource=? WHERE id_user=? AND id_game=?";
         PreparedStatement ps = connection.prepareStatement(query);
 
-        ps.setInt(1, o.getUser().getId());
-        ps.setInt(2, o.getGame().getId());
-        */
+        ps.setInt(1, o.getRessource());
+        ps.setInt(2, o.getUser().getId());
+        ps.setInt(3, o.getGame().getId());
+        ps.executeUpdate();
     }
 
 
@@ -118,11 +119,13 @@ public class JoueurMapper extends DataMapper<IJoueur> {
             List<IJoueur> lists = new ArrayList<IJoueur>();
             do {
                 IJoueur g = createJoueur(rs);
-                IJoueur p = idMap.get(g.getId());
+                System.out.println("DEB + " + g.getUser().getUsername());
+
+               //System.out.println("DEbug mapper " + g.getUser().getUsername());
+                /*IJoueur p = idMap.get(g.getId());
                 if (p == null) {
                     idMap.put(g.getId(), g);
-                    g.add(UnitOfWork.getInstance());
-                }
+                }*/
                 lists.add(g);
             } while (rs.next());
 

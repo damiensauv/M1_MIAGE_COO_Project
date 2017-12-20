@@ -94,13 +94,21 @@ public class GameService {
 
     public void initGame(IGame game) {
 
-        // placement ville
-        CarteService.getInstance().initVille(game);
+        //CarteService.getInstance().initVille(game);
 
-        setOwnerTerritoire(game.getCarte().getTerritoires());
+        //setOwnerTerritoire(game.getCarte().getTerritoires());
 
-        // update ressource joueur
+        initRessourcePlayer(game, game.getNbInitRes());
+
         // UnitOfWork.getInstance().commit();
+    }
+
+    private void initRessourcePlayer(IGame game, Integer ressource) {
+
+        for (IJoueur j : game.getUserInGame()) {
+            j.setRessource(ressource);
+        }
+        UnitOfWork.getInstance().commit();
     }
 
     private void setOwnerTerritoire(List<Territoire> ts) {

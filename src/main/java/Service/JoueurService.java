@@ -25,9 +25,7 @@ public class JoueurService {
 
     public IJoueur createJoueur(IGame game, IUser user) throws SQLException {
 
-        IJoueur joueur = new Joueur();
-        joueur.setGame(game);
-        joueur.setUser(user);
+        IJoueur joueur = new Joueur(user, game);
 
         JoueurMapper.getInstance().insert(joueur);
         return joueur;

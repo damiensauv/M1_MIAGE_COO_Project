@@ -58,7 +58,6 @@ public abstract class Territoire extends AObject implements ITerritoire {
     public void setOwner(IUser owner) {
         this.owner = owner;
         notifier();
-        System.out.println("NOTIF OWNER");
     }
 
     public void add(Observer o) {

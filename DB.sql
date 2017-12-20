@@ -35,6 +35,7 @@ CREATE TABLE game (
 CREATE TABLE joueur (
   id_user int(11) NOT NULL,
   id_game int(11) NOT NULL,
+  ressource INT NOT NULL DEFAULT 0,
   PRIMARY KEY (id_user, id_game),
   FOREIGN KEY (id_user) REFERENCES user(id),
   FOREIGN KEY (id_game) REFERENCES game(id)
