@@ -10,9 +10,9 @@ public interface ICarte extends IDomainObject {
 
     public void setTerritoire(Coordonnees coord, int type);
 
-    public List<List<Territoire>> getTerritoires();
+    public List<Territoire> getTerritoires();
 
-    public void setTerritoires(List<List<Territoire>> carte);
+    public void setTerritoires(List<Territoire> carte);
 
     public void AfficherCarteDebug();
 

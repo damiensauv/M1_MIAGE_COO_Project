@@ -67,13 +67,12 @@ public class CarteMapper extends DataMapper<ICarte> {
         Integer idx = getLastIndexInsert(preparedStatement);
         o.setId(idx);
 
-        List<List<Territoire>> carte = o.getTerritoires();
+        List<Territoire> carte = o.getTerritoires();
 
-        for (List<Territoire> at : carte) {
-            for (Territoire t : at) {
+        for (Territoire t : carte) {
                 t.setId(idx);
                 TerritoireService.getInstance().insertBasicTerritoire(t);
-            }
+
         }
 
         return 0;
@@ -84,7 +83,7 @@ public class CarteMapper extends DataMapper<ICarte> {
         ICarte carte = new Carte(
                 rs.getInt("id"),
                 rs.getString("seed"),
-                new VirtualProxyGenerique.VirtualProxyBuilder<List<List<Territoire>>>(List.class, new TerritoireFactory(rs.getInt("id"))).getProxy()
+                new VirtualProxyGenerique.VirtualProxyBuilder<List<Territoire>>(List.class, new TerritoireFactory(rs.getInt("id"))).getProxy()
         );
 
         return carte;

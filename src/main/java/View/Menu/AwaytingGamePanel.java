@@ -56,6 +56,8 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Tu n'est pas le proprio");
             else if (ret == 2)
                 JOptionPane.showMessageDialog(this, "Tu est seul");
+            else if (ret == 3)
+                JOptionPane.showMessageDialog(this, "Carte Trop petite");// TODO a gere a la creation
 
 //            this.getMyFrame().switchPanel(new CartePanel(this.getMyFrame()));
 

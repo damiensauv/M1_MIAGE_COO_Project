@@ -109,6 +109,8 @@ public class GameService {
 
         if (game.getUserInGame().size() <= 1)
             return 2;
+        if (game.getUserInGame().size() >= (game.getMapSize().getY() * game.getMapSize().getX()))
+            return 3;
 
         this.initGame(game);
 

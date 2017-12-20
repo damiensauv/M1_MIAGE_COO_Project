@@ -49,26 +49,35 @@ public class CarteService {
         boolean flag;
 
         Random randomGenerator = new Random();
-
+        
         ICarte carte = game.getCarte();
+
         for (IJoueur j : game.getUserInGame()) {
             // TODO : prendre en compte la distance Min
             flag = true;
             IVille ville = new Ville(j.getUser());
 
-            randomX = randomGenerator.nextInt(game.getMapSize().getX());
-            randomY = randomGenerator.nextInt(game.getMapSize().getY());
+            while (flag) {
+                randomX = randomGenerator.nextInt(game.getMapSize().getX());
+                randomY = randomGenerator.nextInt(game.getMapSize().getY());
 
-
-                /*
-                if (carte.getCarte()[randomX][randomY].getVilles() == null) {
-                    carte.getCarte()[randomX][randomY].setVilles(ville);
+                Territoire t = searchTerritoireByCoo(carte.getTerritoires(), randomX, randomY);
+                if (t.getVilles() == null) {
+                    t.setVilles(ville);
                     flag = false;
                 }
-                */
-
+            }
         }
 
         UnitOfWork.getInstance().commit();
+    }
+
+    private Territoire searchTerritoireByCoo(List<Territoire> territoires, int x, int y) {
+
+        return territoires.stream()
+                .filter(o -> o.getCoordonnees().getX().equals(x) && o.getCoordonnees().getY().equals(y))
+                .findAny()
+                .orElse(null);
+
     }
 }

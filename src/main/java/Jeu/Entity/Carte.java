@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Carte extends AObject implements ICarte {
 
-    private List<List<Territoire>> territoires;
+    private List<Territoire> territoires;
 
     private String seed;
 
@@ -20,14 +20,13 @@ public class Carte extends AObject implements ICarte {
         int sizeX = coo.getX();
         int sizeY = coo.getY();
 
-        this.territoires = new ArrayList<List<Territoire>>();
+        this.territoires = new ArrayList<Territoire>();
 
         // Il nous faut un nombre aléatoire pour générer les cases de la map
         Random randomGenerator = new Random();
 
         // On crée la carte ligne par ligne
         for (int i = 0; i < sizeX; i++) {
-            this.territoires.add(new ArrayList<Territoire>());
             for (int j = 0; j < sizeY; j++) {
                 randomInt = randomGenerator.nextInt(3);
                 this.setTerritoire(new Coordonnees(i, j), randomInt);
@@ -36,36 +35,34 @@ public class Carte extends AObject implements ICarte {
         this.add(UnitOfWork.getInstance());
     }
 
-    public Carte(int id, String seed, List<List<Territoire>> territoires) {
+    public Carte(int id, String seed, List<Territoire> territoires) {
         this.setId(id);
         this.seed = seed;
         this.territoires = territoires;
     }
 
     public void setTerritoire(Coordonnees coord, int type) {
-        int xpos = coord.getX();
-        int ypos = coord.getY();
 
         switch (type) {
             case 0:
-                this.territoires.get(xpos).add(new Plaine(coord, null, null));
+                this.territoires.add(new Plaine(coord, null, null));
                 break;
             case 1:
-                this.territoires.get(xpos).add(new Champ(coord, null, null));
+                this.territoires.add(new Champ(coord, null, null));
                 break;
             case 2:
-                this.territoires.get(xpos).add(new Montagne(coord, null, null));
+                this.territoires.add(new Montagne(coord, null, null));
                 break;
             default:
                 break;
         }
     }
 
-    public List<List<Territoire>> getTerritoires() {
+    public List<Territoire> getTerritoires() {
         return territoires;
     }
 
-    public void setTerritoires(List<List<Territoire>> carte) {
+    public void setTerritoires(List<Territoire> carte) {
         this.territoires = carte;
         notifier();
     }

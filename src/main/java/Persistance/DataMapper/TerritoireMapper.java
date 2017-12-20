@@ -50,10 +50,10 @@ public class TerritoireMapper extends DataMapper<ITerritoire> {
     }
 
 
-    public List<List<Territoire>> findAllTerritoire(Integer id) {
+    public List<Territoire> findAllTerritoire(Integer id) {
 
         System.out.println("Territoire Find");
-        List<List<Territoire>> p;
+        List<Territoire> p;
 
         String req = "SELECT * FROM territoire WHERE id=?";
         try {
@@ -74,52 +74,33 @@ public class TerritoireMapper extends DataMapper<ITerritoire> {
         }
     }
 
-    private List<List<Territoire>> createTerritoire(ResultSet rs, Integer id) throws SQLException {
+    private List<Territoire> createTerritoire(ResultSet rs, Integer id) throws SQLException {
         int x = 0;
         int y = 0;
 
         IVille ville = null;
-        IUser user = null;
+        IUser user = null; // TODO revoir
+
+        List<Territoire> t = new ArrayList<Territoire>();
 
         while (rs.next()) {
+            Type type = Type.valueOf(rs.getString("type"));
+            Territoire teriTmp = null;
+            ville = null;
+            user = null;
+
             x = rs.getInt("x");
             y = rs.getInt("y");
+
+            if (type.equals(Type.plaine))
+                teriTmp = new Plaine(new Coordonnees(x, y), ville, user);
+            else if (type.equals(Type.champs))
+                teriTmp = new Champ(new Coordonnees(x, y), ville, user);
+            else if (type.equals(Type.montagne))
+                teriTmp = new Montagne(new Coordonnees(x, y), ville, user);
+
+            t.add(teriTmp);
         }
-        x++;
-        y++;
-
-        String req = "SELECT * FROM territoire WHERE id=?";
-
-        List<List<Territoire>> t = new ArrayList<List<Territoire>>();
-        PreparedStatement ps = connection.prepareStatement(req);
-        ps.setInt(1, id);
-        rs = ps.executeQuery();
-
-        for (int i = 0; i < x; i++) {
-            t.add(new ArrayList<Territoire>());
-            for (int j = 0; j < y; j++) {
-
-                while (rs.next()) {
-                    Type type = Type.valueOf(rs.getString("type"));
-                    Territoire teriTmp = null;
-                    ville = null; // TODO
-                    user = null; // TODO
-
-                    x = rs.getInt("x");
-                    y = rs.getInt("y");
-
-                    if (type.equals(Type.plaine))
-                        teriTmp = new Plaine(new Coordonnees(x, y), ville, user);
-                    else if (type.equals(Type.champs))
-                        teriTmp = new Champ(new Coordonnees(x, y), ville, user);
-                    else if (type.equals(Type.montagne))
-                        teriTmp = new Montagne(new Coordonnees(x, y), ville, user);
-
-                    t.get(i).add(teriTmp);
-                }
-            }
-        }
-
 
         return t;
     }

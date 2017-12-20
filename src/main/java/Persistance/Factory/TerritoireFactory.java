@@ -5,7 +5,7 @@ import Persistance.DataMapper.TerritoireMapper;
 
 import java.util.List;
 
-public class TerritoireFactory implements Factory<List<List<Territoire>>> {
+public class TerritoireFactory implements Factory<List<Territoire>> {
 
     private Integer id;
 
@@ -13,7 +13,7 @@ public class TerritoireFactory implements Factory<List<List<Territoire>>> {
         this.id = id;
     }
 
-    public List<List<Territoire>> create() {
+    public List<Territoire> create() {
         return TerritoireMapper.getInstance().findAllTerritoire(this.id);
     }
 }
