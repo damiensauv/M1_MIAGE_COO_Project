@@ -130,7 +130,7 @@ public class GameMapper extends DataMapper<IGame> {
         ps.executeUpdate();
     }
 
-    public List<IGame> findAllGamesByStatus() {
+    public List<IGame> findAllGamesByStatusAwayting() {
 
         List<IGame> listGames = new ArrayList<IGame>();
         String req = "SELECT * FROM game WHERE status = 'awayting'";
@@ -153,4 +153,26 @@ public class GameMapper extends DataMapper<IGame> {
         }
     }
 
+    public List<IGame> findAllGamesByStatusInProgress(IUser connectedUser) {
+        List<IGame> listGames = new ArrayList<IGame>();
+        String req = "SELECT * FROM game Join joueur ON joueur.id_game = game.id WHERE game.status='InProgress' and joueur.id_user = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setInt(1, connectedUser.getId());
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) { // TODO : LEVER une exception
+                System.out.println("Game not in bd ");
+                return null;
+            }
+
+            do {
+                IGame g = createGame(rs);
+                listGames.add(g);
+            } while (rs.next());
+            return listGames;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

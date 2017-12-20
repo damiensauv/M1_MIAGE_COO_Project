@@ -64,7 +64,7 @@ public class GameService {
     }
 
     public List<IGame> getAwaytingGame() {
-        return GameMapper.getInstance().findAllGamesByStatus();
+        return GameMapper.getInstance().findAllGamesByStatusAwayting();
     }
 
 
@@ -93,7 +93,7 @@ public class GameService {
     }
 
     public void initGame(IGame game) {
-        
+
         CarteService.getInstance().initVille(game);
         setOwnerTerritoire(game.getCarte().getTerritoires());
         initRessourcePlayer(game, game.getNbInitRes());
@@ -136,5 +136,9 @@ public class GameService {
         this.initGame(game);
 
         return 0;
+    }
+
+    public List<IGame> getInProgressGame() {
+        return GameMapper.getInstance().findAllGamesByStatusInProgress(UserService.getInstance().getConnectedUser());
     }
 }
