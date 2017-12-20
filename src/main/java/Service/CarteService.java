@@ -66,7 +66,7 @@ public class CarteService {
 
                 Territoire t = searchTerritoireByCoo(carte.getTerritoires(), randomX, randomY);
 
-                if (null == t.getVilles()) {
+                if (t != null && null == t.getVilles()) {
                     t.setVilles(ville);
                     //t.setOwner(j.getUser()); // TODO faire un service qui gere les Owner de territoire
                     flag = false;

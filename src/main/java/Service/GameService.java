@@ -3,6 +3,7 @@ package Service;
 import Jeu.Entity.Coordonnees;
 import Jeu.Entity.Game;
 import Jeu.Entity.Status;
+import Jeu.Entity.Territoire;
 import Jeu.Interface.IGame;
 import Jeu.Interface.IJoueur;
 import Jeu.Interface.IUser;
@@ -96,9 +97,23 @@ public class GameService {
         // placement ville
         CarteService.getInstance().initVille(game);
 
-        // set Owner case
+        setOwnerTerritoire(game.getCarte().getTerritoires());
+
         // update ressource joueur
         // UnitOfWork.getInstance().commit();
+    }
+
+    private void setOwnerTerritoire(List<Territoire> ts) {
+
+        for (Territoire t : ts) {
+            if (null == t.getVilles()) {
+                // on check par armée TODO
+            } else {
+                IUser u = t.getVilles().getJoueur();
+                t.setOwner(u);
+            }
+        }
+        UnitOfWork.getInstance().commit();
     }
 
     public Integer launchGame(IGame game) {
