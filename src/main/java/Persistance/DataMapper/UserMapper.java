@@ -46,7 +46,7 @@ public class UserMapper extends DataMapper<IUser> {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) { // TODO : LEVER une exception
-                System.out.println("not in bd " + id);
+                System.out.println("User not in bd " + id);
                 return null;
             }
             p = this.createUser(rs);

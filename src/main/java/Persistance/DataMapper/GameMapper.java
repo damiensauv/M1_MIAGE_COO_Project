@@ -120,15 +120,14 @@ public class GameMapper extends DataMapper<IGame> {
 
         System.out.println("UPDATE GAME");
 
-        /*
-        String query = "UPDATE game SET current_turn=?, status=?, carte=? WHERE id = ?";
+        String query = "UPDATE game SET  current_turn=?, status=? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
+
+        // TODO : UPDATE WINNER
         ps.setInt(1, o.getCurrentTurn());
         ps.setString(2, o.getStatus().toString());
-        ps.setInt(3, o.getCarte().getId());
-        ps.setInt(4, o.getId());
+        ps.setInt(3, o.getId());
         ps.executeUpdate();
-        */
     }
 
     public List<IGame> findAllGamesByStatus() {

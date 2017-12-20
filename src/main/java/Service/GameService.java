@@ -93,14 +93,12 @@ public class GameService {
     }
 
     public void initGame(IGame game) {
-
-        //CarteService.getInstance().initVille(game);
-
-        //setOwnerTerritoire(game.getCarte().getTerritoires());
-
-        initRessourcePlayer(game, game.getNbInitRes());
-
-        // UnitOfWork.getInstance().commit();
+        /*
+        CarteService.getInstance().initVille(game);
+        setOwnerTerritoire(game.getCarte().getTerritoires());
+        initRessourcePlayer(game, game.getNbInitRes());*/
+        game.setStatus(Status.InProgress);
+        UnitOfWork.getInstance().commit();
     }
 
     private void initRessourcePlayer(IGame game, Integer ressource) {

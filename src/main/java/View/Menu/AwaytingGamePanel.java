@@ -1,6 +1,5 @@
 package View.Menu;
 
-import Jeu.Entity.Game;
 import Jeu.Interface.IGame;
 import Service.GameService;
 import View.Game.CartePanel;
@@ -59,7 +58,9 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
             else if (ret == 3)
                 JOptionPane.showMessageDialog(this, "Carte Trop petite");// TODO a gere a la creation
 
-//            this.getMyFrame().switchPanel(new CartePanel(this.getMyFrame()));
+            JOptionPane.showMessageDialog(this, "Partie a lancer depuis partie en cours");
+
+            this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
 
 
         } else if (e.getSource() == cancel) {

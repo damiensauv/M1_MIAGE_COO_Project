@@ -73,6 +73,7 @@ public class Game extends AObject implements IGame {
 
     public void setStatus(Status status) {
         this.status = status;
+        System.out.println("Notif STATUS");
         notifier();
     }
 
