@@ -130,12 +130,13 @@ public class GameMapper extends DataMapper<IGame> {
         ps.executeUpdate();
     }
 
-    public List<IGame> findAllGamesByStatusAwayting() {
+    public List<IGame> findAllGamesByStatus(Status status) {
 
         List<IGame> listGames = new ArrayList<IGame>();
-        String req = "SELECT * FROM game WHERE status = 'awayting'";
+        String req = "SELECT * FROM game WHERE status = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(req);
+            ps.setString(1, status.toString());
             ResultSet rs = ps.executeQuery();
             if (!rs.next()) { // TODO : LEVER une exception
                 System.out.println("Game not in bd ");

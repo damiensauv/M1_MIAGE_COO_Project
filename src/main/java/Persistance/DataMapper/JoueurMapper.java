@@ -119,7 +119,7 @@ public class JoueurMapper extends DataMapper<IJoueur> {
             List<IJoueur> lists = new ArrayList<IJoueur>();
             do {
                 IJoueur g = createJoueur(rs);
-                System.out.println("DEB + " + g.getUser().getUsername());
+                //System.out.println("DEB + " + g.getUser().getUsername());
 
                //System.out.println("DEbug mapper " + g.getUser().getUsername());
                 /*IJoueur p = idMap.get(g.getId());

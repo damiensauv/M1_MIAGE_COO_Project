@@ -64,7 +64,7 @@ public class GameService {
     }
 
     public List<IGame> getAwaytingGame() {
-        return GameMapper.getInstance().findAllGamesByStatusAwayting();
+        return GameMapper.getInstance().findAllGamesByStatus(Status.awayting);
     }
 
 
@@ -140,5 +140,9 @@ public class GameService {
 
     public List<IGame> getInProgressGame() {
         return GameMapper.getInstance().findAllGamesByStatusInProgress(UserService.getInstance().getConnectedUser());
+    }
+
+    public List<IGame> getHistoGame() {
+        return GameMapper.getInstance().findAllGamesByStatus(Status.finish);
     }
 }

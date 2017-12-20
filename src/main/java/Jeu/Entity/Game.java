@@ -194,7 +194,14 @@ public class Game extends AObject implements IGame {
 
     @Override
     public String toString() {
-        return name + " | [" + this.userInGame.size() + "/" + maxUser + "]";
+        String display = name + " | [" + this.userInGame.size() + "/" + maxUser + "]";
+
+        if (this.currentTurn > 0) {
+            String winner = " | Winner : " + this.winner.getUsername() + " | " + " Nb Tour : " + this.currentTurn;
+            display = display + winner;
+        }
+
+        return display;
     }
 
     public Integer getDistanceMinVille() {

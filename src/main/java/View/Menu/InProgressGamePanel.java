@@ -38,8 +38,7 @@ public class InProgressGamePanel extends MyPanel implements ActionListener {
             jListgame = new JList<IGame>(listModel);
             this.add(jListgame);
             this.add(new JScrollPane(jListgame));
-        }else
-            this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
+        }
     }
 
     public void actionPerformed(ActionEvent e) {

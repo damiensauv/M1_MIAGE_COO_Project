@@ -24,17 +24,17 @@ public class VirtualProxyGenerique {
         public T getProxy() {
             @SuppressWarnings("unchecked")
             T r  = (T) Proxy.newProxyInstance(iface.getClassLoader(), new Class<?>[] { iface }, this);
-            System.out.println("PROXY: On a cree le virtual proxy!");
+            //System.out.println("PROXY: On a cree le virtual proxy!");
             return r;
         }
 
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            System.out.println("PROXY: On a appelle la methode " + method.getName() + " sur le virtual proxy!");
+            //System.out.println("PROXY: On a appelle la methode " + method.getName() + " sur le virtual proxy!");
             if (realObject == null) {
-                System.out.println("PROXY: On initialise l'objet proxyfié maintenant");
+                //System.out.println("PROXY: On initialise l'objet proxyfié maintenant");
                 realObject = factory.create();
             }
-            System.out.println("PROXY: On appelle la methode sur l'objet reel.");
+            //System.out.println("PROXY: On appelle la methode sur l'objet reel.");
             return method.invoke(realObject, args);
         }
     }
