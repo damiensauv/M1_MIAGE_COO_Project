@@ -13,17 +13,6 @@ public class CartePanel extends MyPanel implements MouseListener {
         super(frame);
 
 
-        this.setLayout(new GridLayout(4, 4));
-        this.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-
-
-        /// TODO : Panel qui contient des panels
-        for (int i =0; i<(4*4); i++){
-            final JLabel label = new JLabel();
-            label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            this.add(label);
-        }
-
         addMouseListener(this);
 
         this.setPreferredSize(new Dimension(300, 230));

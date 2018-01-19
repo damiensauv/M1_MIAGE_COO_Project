@@ -38,7 +38,7 @@ public class UserService {
         }
     }
 
-    public void disconet(){
+    public void disconnect(){
         connectedUser = null;
     }
 

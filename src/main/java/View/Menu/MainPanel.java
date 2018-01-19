@@ -47,7 +47,7 @@ public class MainPanel extends MyPanel implements ActionListener {
         } else if (source == histoGame) {
             this.getMyFrame().switchPanel(new HistoGamePanel(this.getMyFrame()));
         } else if (source == logout) {
-            UserService.getInstance().disconet();
+            UserService.getInstance().disconnect();
             this.getMyFrame().switchPanel(new ConnexionPanel(this.getMyFrame()));
         } else if (source == awaytingGame) {
             this.getMyFrame().switchPanel(new AwaytingGamePanel(this.getMyFrame()));
