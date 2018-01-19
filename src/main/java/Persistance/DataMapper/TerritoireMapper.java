@@ -47,7 +47,6 @@ public class TerritoireMapper extends DataMapper<ITerritoire> {
     }
 
     public void update(ITerritoire o) throws SQLException {
-        System.out.println("UPDATE TERRITOIRE");
 
         String query = "UPDATE territoire SET id_ville=?, owner=? WHERE id=? AND x=? AND y=?";
         PreparedStatement ps = connection.prepareStatement(query);
@@ -69,15 +68,11 @@ public class TerritoireMapper extends DataMapper<ITerritoire> {
         ps.setInt(4, o.getCoordonnees().getX());
         ps.setInt(5, o.getCoordonnees().getY());
 
-
         ps.executeUpdate();
-
     }
-
 
     public List<Territoire> findAllTerritoire(Integer id) {
 
-        System.out.println("Territoire Find");
         List<Territoire> p;
 
         String req = "SELECT * FROM territoire WHERE id=?";
@@ -85,7 +80,7 @@ public class TerritoireMapper extends DataMapper<ITerritoire> {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) { // TODO : LEVER une exception
+            if (!rs.next()) {
                 System.out.println("Territoire not in bd " + id);
                 return null;
             }
@@ -105,7 +100,7 @@ public class TerritoireMapper extends DataMapper<ITerritoire> {
         int idx;
 
         IVille ville = null;
-        IUser user = null; // TODO revoir
+        IUser user = null;
 
         List<Territoire> t = new ArrayList<Territoire>();
 

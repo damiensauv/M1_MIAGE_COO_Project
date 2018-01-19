@@ -29,8 +29,6 @@ public class CarteMapper extends DataMapper<ICarte> {
 
     public ICarte find(Object idx) {
 
-        System.out.println("CArte Find");
-
         Integer id = (Integer) idx;
 
         ICarte p = idMap.get(id);
@@ -44,7 +42,7 @@ public class CarteMapper extends DataMapper<ICarte> {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) { // TODO : LEVER une exception
+            if (!rs.next()) {
                 System.out.println("Carte not in bd " + id);
                 return null;
             }
@@ -70,8 +68,8 @@ public class CarteMapper extends DataMapper<ICarte> {
         List<Territoire> carte = o.getTerritoires();
 
         for (Territoire t : carte) {
-                t.setId(idx);
-                TerritoireService.getInstance().insertBasicTerritoire(t);
+            t.setId(idx);
+            TerritoireService.getInstance().insertBasicTerritoire(t);
 
         }
 

@@ -49,7 +49,7 @@ public class GameMapper extends DataMapper<IGame> {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) { // TODO : LEVER une exception
+            if (!rs.next()) {
                 System.out.println("Game not in bd " + id);
                 return null;
             }
@@ -118,12 +118,9 @@ public class GameMapper extends DataMapper<IGame> {
 
     public void update(IGame o) throws SQLException {
 
-        System.out.println("UPDATE GAME");
-
         String query = "UPDATE game SET  current_turn=?, status=? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(query);
 
-        // TODO : UPDATE WINNER
         ps.setInt(1, o.getCurrentTurn());
         ps.setString(2, o.getStatus().toString());
         ps.setInt(3, o.getId());
@@ -138,7 +135,7 @@ public class GameMapper extends DataMapper<IGame> {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setString(1, status.toString());
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) { // TODO : LEVER une exception
+            if (!rs.next()) {
                 System.out.println("Game not in bd ");
                 return null;
             }
@@ -161,7 +158,7 @@ public class GameMapper extends DataMapper<IGame> {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setInt(1, connectedUser.getId());
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) { // TODO : LEVER une exception
+            if (!rs.next()) {
                 System.out.println("Game not in bd ");
                 return null;
             }

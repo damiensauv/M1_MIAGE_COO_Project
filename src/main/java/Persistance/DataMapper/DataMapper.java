@@ -10,6 +10,8 @@ import java.sql.SQLException;
 
 public abstract class DataMapper<T> {
 
+    // DataMapper Principal qui est extends
+
     protected Connection connection;
     protected IDMap<T> idMap;
 

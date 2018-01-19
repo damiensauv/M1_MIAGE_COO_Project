@@ -49,6 +49,7 @@ public class AwaytingGamePanel extends MyPanel implements ActionListener {
         if (e.getSource() == launch) {
             IGame game = jListgame.getSelectedValue();
 
+            // on check le retour du game Service et on y mets un msg adequate
             Integer ret = GameService.getInstance().launchGame(game);
             if (ret == 1)
                 JOptionPane.showMessageDialog(this, "Tu n'est pas le proprio");

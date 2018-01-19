@@ -45,7 +45,7 @@ public class UserMapper extends DataMapper<IUser> {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) { // TODO : LEVER une exception
+            if (!rs.next()) {
                 System.out.println("User not in bd " + id);
                 return null;
             }
@@ -67,7 +67,7 @@ public class UserMapper extends DataMapper<IUser> {
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) { // TODO : LEVER une exception
+            if (!rs.next()) {
                 System.out.println("not in bd " + username);
                 return null;
             }

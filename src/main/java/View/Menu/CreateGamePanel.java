@@ -80,13 +80,14 @@ public class CreateGamePanel extends MyPanel implements ActionListener {
                 Integer tt = Integer.parseInt(timeTurn.getText().trim());
                 Integer distance = Integer.parseInt(distancemin.getText().trim());
 
+                // on appel le service
                 GameService.getInstance().createGame(co, maxu, nbir, nbRest, tt, name.getText().trim(), distance);
                 this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (Exception e2) {
                 e2.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Merci de remplit tout les champs correctement");
+                JOptionPane.showMessageDialog(this, "Merci de remplir tout les champs correctement");
             }
         } else if (source == cancel) {
             this.getMyFrame().switchPanel(new MainPanel(this.getMyFrame()));

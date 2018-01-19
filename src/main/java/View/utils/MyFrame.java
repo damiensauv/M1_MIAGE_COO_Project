@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class MyFrame extends JFrame {
 
-
+    // on extend la JFrame afin que l'on puisse avoir une frame principal
     public MyFrame() {
 
         this.setTitle("My Game");

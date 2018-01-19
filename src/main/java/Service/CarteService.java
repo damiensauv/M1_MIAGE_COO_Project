@@ -53,7 +53,6 @@ public class CarteService {
         ICarte carte = game.getCarte();
 
         for (IJoueur j : game.getUserInGame()) {
-            // TODO : prendre en compte la distance Min
             flag = true;
 
             IVille ville = new Ville(j.getUser(), carte);
@@ -68,7 +67,7 @@ public class CarteService {
 
                 if (t != null && null == t.getVilles()) {
                     t.setVilles(ville);
-                    //t.setOwner(j.getUser()); // TODO faire un service qui gere les Owner de territoire
+                    //t.setOwner(j.getUser());
                     flag = false;
                 }
             }

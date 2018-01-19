@@ -32,9 +32,9 @@ public class JoueurMapper extends DataMapper<IJoueur> {
     private IJoueur createJoueur(ResultSet rs) throws SQLException {
 
         return new Joueur(
-        new VirtualProxyGenerique.VirtualProxyBuilder<IGame>(IGame.class, new GameFactory(rs.getInt("id_game"))).getProxy(),
-        new VirtualProxyGenerique.VirtualProxyBuilder<IUser>(IUser.class, new UserFactory(rs.getInt("id_user"))).getProxy(),
-        rs.getInt("ressource")
+                new VirtualProxyGenerique.VirtualProxyBuilder<IGame>(IGame.class, new GameFactory(rs.getInt("id_game"))).getProxy(),
+                new VirtualProxyGenerique.VirtualProxyBuilder<IUser>(IUser.class, new UserFactory(rs.getInt("id_user"))).getProxy(),
+                rs.getInt("ressource")
         );
     }
 
@@ -55,7 +55,7 @@ public class JoueurMapper extends DataMapper<IJoueur> {
             ps.setInt(1, id[0]);
             ps.setInt(2, id[1]);
             ResultSet rs = ps.executeQuery();
-            if (!rs.next()) { // TODO : LEVER une exception
+            if (!rs.next()) {
                 System.out.println("not in bd " + id);
                 return null;
             }
@@ -103,7 +103,6 @@ public class JoueurMapper extends DataMapper<IJoueur> {
         ps.executeUpdate();
     }
 
-
     public List<IJoueur> findAllJoueurInGame(int id) {
         String req = "SELECT * FROM joueur WHERE id_game=?";
         try {
@@ -118,13 +117,6 @@ public class JoueurMapper extends DataMapper<IJoueur> {
             List<IJoueur> lists = new ArrayList<IJoueur>();
             do {
                 IJoueur g = createJoueur(rs);
-                //System.out.println("DEB + " + g.getUser().getUsername());
-
-               //System.out.println("DEbug mapper " + g.getUser().getUsername());
-                /*IJoueur p = idMap.get(g.getId());
-                if (p == null) {
-                    idMap.put(g.getId(), g);
-                }*/
                 lists.add(g);
             } while (rs.next());
 
