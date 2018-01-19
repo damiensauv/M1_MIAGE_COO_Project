@@ -71,3 +71,6 @@ CREATE TABLE armee(
   y int(11) NOT NULL,
   PRIMARY KEY (id)
 );
+
+INSERT INTO user (username, password) VALUES ("damien", "1");
+INSERT INTO user (username, password) VALUES ("arthur", "2");

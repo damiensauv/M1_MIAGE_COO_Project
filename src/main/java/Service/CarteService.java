@@ -1,13 +1,13 @@
 package Service;
 
-import Jeu.Entity.Carte;
-import Jeu.Entity.Coordonnees;
-import Jeu.Entity.Territoire;
-import Jeu.Entity.Ville;
-import Jeu.Interface.ICarte;
-import Jeu.Interface.IGame;
-import Jeu.Interface.IJoueur;
-import Jeu.Interface.IVille;
+import Domain.Entity.Carte;
+import Domain.Entity.Coordonnees;
+import Domain.Entity.Territoire;
+import Domain.Entity.Ville;
+import Domain.Interface.ICarte;
+import Domain.Interface.IGame;
+import Domain.Interface.IJoueur;
+import Domain.Interface.IVille;
 import Persistance.DataMapper.CarteMapper;
 import Util.UnitOfWork;
 

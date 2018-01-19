@@ -1,7 +1,7 @@
-package Jeu.Interface;
+package Domain.Interface;
 
-import Jeu.Entity.Coordonnees;
-import Jeu.Entity.Territoire;
+import Domain.Entity.Coordonnees;
+import Domain.Entity.Territoire;
 import Util.IDomainObject;
 
 import java.util.List;

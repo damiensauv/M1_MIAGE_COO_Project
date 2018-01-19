@@ -1,9 +1,9 @@
 package Service;
 
-import Jeu.Entity.Joueur;
-import Jeu.Interface.IGame;
-import Jeu.Interface.IJoueur;
-import Jeu.Interface.IUser;
+import Domain.Entity.Joueur;
+import Domain.Interface.IGame;
+import Domain.Interface.IJoueur;
+import Domain.Interface.IUser;
 import Persistance.DataMapper.JoueurMapper;
 
 import java.sql.SQLException;

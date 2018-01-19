@@ -1,7 +1,6 @@
 package Persistance.Factory;
 
-import Jeu.Interface.IJoueur;
-import Jeu.Interface.IUser;
+import Domain.Interface.IJoueur;
 import Persistance.DataMapper.JoueurMapper;
 
 import java.util.List;

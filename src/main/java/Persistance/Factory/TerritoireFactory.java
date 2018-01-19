@@ -1,6 +1,6 @@
 package Persistance.Factory;
 
-import Jeu.Entity.Territoire;
+import Domain.Entity.Territoire;
 import Persistance.DataMapper.TerritoireMapper;
 
 import java.util.List;

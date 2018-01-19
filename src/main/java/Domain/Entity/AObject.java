@@ -1,4 +1,4 @@
-package Jeu.Entity;
+package Domain.Entity;
 
 import Util.IDomainObject;
 import Util.Observer;

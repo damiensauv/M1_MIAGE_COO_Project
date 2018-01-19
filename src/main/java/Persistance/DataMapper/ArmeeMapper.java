@@ -1,6 +1,6 @@
 package Persistance.DataMapper;
 
-import Jeu.Interface.IArmee;
+import Domain.Interface.IArmee;
 
 import java.sql.SQLException;
 

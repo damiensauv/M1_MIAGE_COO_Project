@@ -1,8 +1,8 @@
 package Persistance.DataMapper;
 
-import Jeu.Entity.Carte;
-import Jeu.Entity.Territoire;
-import Jeu.Interface.ICarte;
+import Domain.Entity.Carte;
+import Domain.Entity.Territoire;
+import Domain.Interface.ICarte;
 import Persistance.Factory.TerritoireFactory;
 import Service.TerritoireService;
 import Util.VirtualProxyGenerique;

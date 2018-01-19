@@ -1,8 +1,7 @@
-package Jeu.Entity;
+package Domain.Entity;
 
-import Jeu.Interface.IUser;
+import Domain.Interface.IUser;
 import Util.Observer;
-import Util.UnitOfWork;
 import Util.Visitor;
 
 public class User extends AObject implements IUser {

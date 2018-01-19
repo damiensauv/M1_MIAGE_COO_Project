@@ -1,6 +1,6 @@
 package Persistance.Factory;
 
-import Jeu.Interface.ICarte;
+import Domain.Interface.ICarte;
 import Persistance.DataMapper.CarteMapper;
 
 public class CarteFactory implements Factory<ICarte> {

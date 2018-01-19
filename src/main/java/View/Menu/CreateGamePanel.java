@@ -1,6 +1,6 @@
 package View.Menu;
 
-import Jeu.Entity.Coordonnees;
+import Domain.Entity.Coordonnees;
 import Service.GameService;
 import View.utils.MyFrame;
 import View.utils.MyPanel;

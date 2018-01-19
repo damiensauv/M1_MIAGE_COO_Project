@@ -1,13 +1,11 @@
-package Jeu.Entity;
+package Domain.Entity;
 
-import Jeu.Interface.ITerritoire;
-import Jeu.Interface.IUser;
-import Jeu.Interface.IVille;
+import Domain.Interface.ITerritoire;
+import Domain.Interface.IUser;
+import Domain.Interface.IVille;
 import Util.Observer;
 import Util.UnitOfWork;
 import Util.Visitor;
-
-import java.util.List;
 
 public abstract class Territoire extends AObject implements ITerritoire {
 

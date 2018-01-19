@@ -1,6 +1,6 @@
 package Service;
 
-import Jeu.Interface.IVille;
+import Domain.Interface.IVille;
 import Persistance.DataMapper.VilleMapper;
 
 import java.sql.SQLException;

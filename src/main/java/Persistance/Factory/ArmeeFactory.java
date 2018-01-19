@@ -1,6 +1,6 @@
 package Persistance.Factory;
 
-import Jeu.Interface.IArmee;
+import Domain.Interface.IArmee;
 import Persistance.DataMapper.ArmeeMapper;
 
 public class ArmeeFactory implements Factory<IArmee> {

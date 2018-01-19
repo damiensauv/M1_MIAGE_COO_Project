@@ -1,7 +1,7 @@
-package Jeu.Interface;
+package Domain.Interface;
 
-import Jeu.Entity.Coordonnees;
-import Jeu.Entity.Type;
+import Domain.Entity.Coordonnees;
+import Domain.Entity.Type;
 
 public interface ITerritoire {
 

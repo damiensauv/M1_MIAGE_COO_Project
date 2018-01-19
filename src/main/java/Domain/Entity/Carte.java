@@ -1,6 +1,6 @@
-package Jeu.Entity;
+package Domain.Entity;
 
-import Jeu.Interface.ICarte;
+import Domain.Interface.ICarte;
 import Util.Observer;
 import Util.UnitOfWork;
 import Util.Visitor;

@@ -1,12 +1,11 @@
 package Persistance.DataMapper;
 
-import Jeu.Entity.Joueur;
-import Jeu.Interface.IGame;
-import Jeu.Interface.IJoueur;
-import Jeu.Interface.IUser;
+import Domain.Entity.Joueur;
+import Domain.Interface.IGame;
+import Domain.Interface.IJoueur;
+import Domain.Interface.IUser;
 import Persistance.Factory.GameFactory;
 import Persistance.Factory.UserFactory;
-import Util.UnitOfWork;
 import Util.VirtualProxyGenerique;
 
 import java.sql.PreparedStatement;

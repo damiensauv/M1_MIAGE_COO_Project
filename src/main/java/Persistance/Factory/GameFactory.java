@@ -1,6 +1,6 @@
 package Persistance.Factory;
 
-import Jeu.Interface.IGame;
+import Domain.Interface.IGame;
 import Persistance.DataMapper.GameMapper;
 
 public class GameFactory implements Factory<IGame> {

@@ -1,6 +1,6 @@
-package Jeu.Interface;
+package Domain.Interface;
 
-import Jeu.Entity.Coordonnees;
+import Domain.Entity.Coordonnees;
 import Util.IDomainObject;
 
 public interface IArmee extends IDomainObject {

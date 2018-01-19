@@ -1,4 +1,4 @@
-package Jeu.Entity;
+package Domain.Entity;
 
 public class Coordonnees {
 

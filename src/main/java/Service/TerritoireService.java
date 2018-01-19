@@ -1,7 +1,6 @@
 package Service;
 
-import Jeu.Entity.Territoire;
-import Jeu.Interface.ITerritoire;
+import Domain.Interface.ITerritoire;
 import Persistance.DataMapper.TerritoireMapper;
 
 import java.sql.SQLException;

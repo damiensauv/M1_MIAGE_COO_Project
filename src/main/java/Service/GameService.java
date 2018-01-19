@@ -1,12 +1,12 @@
 package Service;
 
-import Jeu.Entity.Coordonnees;
-import Jeu.Entity.Game;
-import Jeu.Entity.Status;
-import Jeu.Entity.Territoire;
-import Jeu.Interface.IGame;
-import Jeu.Interface.IJoueur;
-import Jeu.Interface.IUser;
+import Domain.Entity.Coordonnees;
+import Domain.Entity.Game;
+import Domain.Entity.Status;
+import Domain.Entity.Territoire;
+import Domain.Interface.IGame;
+import Domain.Interface.IJoueur;
+import Domain.Interface.IUser;
 import Persistance.DataMapper.GameMapper;
 import Persistance.DataMapper.JoueurMapper;
 import Util.UnitOfWork;

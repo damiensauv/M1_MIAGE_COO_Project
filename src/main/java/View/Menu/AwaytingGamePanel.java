@@ -1,8 +1,7 @@
 package View.Menu;
 
-import Jeu.Interface.IGame;
+import Domain.Interface.IGame;
 import Service.GameService;
-import View.Game.CartePanel;
 import View.utils.MyFrame;
 import View.utils.MyPanel;
 

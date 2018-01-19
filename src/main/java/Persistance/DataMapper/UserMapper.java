@@ -1,7 +1,7 @@
 package Persistance.DataMapper;
 
-import Jeu.Entity.User;
-import Jeu.Interface.IUser;
+import Domain.Entity.User;
+import Domain.Interface.IUser;
 import Util.UnitOfWork;
 
 import java.sql.PreparedStatement;

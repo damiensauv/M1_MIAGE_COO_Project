@@ -1,9 +1,9 @@
-package Jeu.Entity;
+package Domain.Entity;
 
-import Jeu.Interface.ICarte;
-import Jeu.Interface.IGame;
-import Jeu.Interface.IJoueur;
-import Jeu.Interface.IUser;
+import Domain.Interface.ICarte;
+import Domain.Interface.IGame;
+import Domain.Interface.IJoueur;
+import Domain.Interface.IUser;
 import Util.Observer;
 import Util.UnitOfWork;
 import Util.Visitor;

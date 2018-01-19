@@ -1,9 +1,9 @@
 package Util;
 
-import Jeu.Interface.IGame;
-import Jeu.Interface.IJoueur;
-import Jeu.Interface.ITerritoire;
-import Jeu.Interface.IUser;
+import Domain.Interface.IGame;
+import Domain.Interface.IJoueur;
+import Domain.Interface.ITerritoire;
+import Domain.Interface.IUser;
 import Persistance.DataMapper.GameMapper;
 import Persistance.DataMapper.JoueurMapper;
 import Persistance.DataMapper.TerritoireMapper;

@@ -1,6 +1,6 @@
 package Persistance.DataMapper;
 
-import Jeu.Interface.IVille;
+import Domain.Interface.IVille;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

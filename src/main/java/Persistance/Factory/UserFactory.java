@@ -1,6 +1,6 @@
 package Persistance.Factory;
 
-import Jeu.Interface.IUser;
+import Domain.Interface.IUser;
 import Persistance.DataMapper.UserMapper;
 
 public class UserFactory implements Factory<IUser> {

@@ -1,7 +1,7 @@
-package Jeu.Entity;
+package Domain.Entity;
 
-import Jeu.Interface.IUser;
-import Jeu.Interface.IVille;
+import Domain.Interface.IUser;
+import Domain.Interface.IVille;
 
 public class Champ extends Territoire {
 

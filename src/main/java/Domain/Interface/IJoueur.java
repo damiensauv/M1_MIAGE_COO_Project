@@ -1,4 +1,4 @@
-package Jeu.Interface;
+package Domain.Interface;
 
 import Util.IDomainObject;
 

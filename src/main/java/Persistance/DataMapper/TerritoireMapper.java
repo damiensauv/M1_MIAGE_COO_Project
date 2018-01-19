@@ -1,9 +1,9 @@
 package Persistance.DataMapper;
 
-import Jeu.Entity.*;
-import Jeu.Interface.ITerritoire;
-import Jeu.Interface.IUser;
-import Jeu.Interface.IVille;
+import Domain.Entity.*;
+import Domain.Interface.ITerritoire;
+import Domain.Interface.IUser;
+import Domain.Interface.IVille;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

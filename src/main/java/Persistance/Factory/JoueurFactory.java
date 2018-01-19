@@ -1,6 +1,6 @@
 package Persistance.Factory;
 
-import Jeu.Interface.IJoueur;
+import Domain.Interface.IJoueur;
 import Persistance.DataMapper.JoueurMapper;
 
 
